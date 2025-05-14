@@ -54,7 +54,8 @@
 
 #figure(
     table(
-        columns: (auto, auto, auto),
+        columns: (50%, 25%, auto),
+        align: (right + horizon, left, left),
         rows: auto,
         [Формула], [Изображение], [Описание],
         [$integral_(-infinity)^(+infinity) f(x) d x$], [#image("template/images/bmstu_logo.svg", width: 30mm)], [Текст],
@@ -64,13 +65,13 @@
 
 #figure(
     ```cpp
-        int main()
-        {
-            for (int i = 0; i < 10; i++) {
-                std::cout << i << std::endl;
-            }
-            return EXIT_SUCCESS;
+    int main()
+    {
+        for (int i = 0; i < 10; i++) {
+            std::cout << i << std::endl;
         }
+        return EXIT_SUCCESS;
+    }
     ```,
     caption: "Подпись к блоку кода",
 )<lst-Цикл>

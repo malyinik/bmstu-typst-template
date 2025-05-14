@@ -37,6 +37,21 @@
     spacing_after: font_config.size - 4pt,
 )
 
+
+// Параметры таблиц
+#let table_config = (
+    caption_vertical_space: 5pt,
+    align: left,
+    caption_position: top,
+)
+
+// Параметры блоков кода
+#let code_block_config = (
+    caption_vertical_space: 5pt,
+    align: left,
+    caption_position: top,
+)
+
 #let bmstu_config(content) = {
     set text(size: font_config.size, font: font_config.font, lang: document_language)
 
@@ -64,8 +79,15 @@
 
     set figure.caption(separator: [ --- ])
     show figure.where(kind: image): set figure.caption(position: bottom)
-    show figure.where(kind: table): set figure.caption(position: top)
-    show figure.where(kind: raw): set figure.caption(position: top)
+
+    // Настройка таблиц
+    show figure.where(kind: table): set figure(gap: table_config.caption_vertical_space)
+    show figure.where(kind: table): set figure.caption(position: table_config.caption_position)
+    show figure.where(kind: table): it => align(table_config.align)[#it]
+
+    // Настройка блоков кода
+    show figure.where(kind: raw): it => align(code_block_config.align)[#it]
+    show figure.where(kind: raw): set figure.caption(position: code_block_config.caption_position)
 
     /**
      * TODO: Настроить содержание
