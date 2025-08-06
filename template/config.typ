@@ -1,97 +1,87 @@
 #import "widgets.typ"
 
-// Параметры шрифта
-#let font_config = (
-    font: "Times New Roman",
-    size: 14pt,
-)
 
-// Основной язык документа
-#let document_language = "ru"
-
-// Параметры абзаца
-#let paragraph_config = (
-    justify: true,
-    indent: 12.5mm,
-    spacing_between_lines: 1em,
-    spacing_between_paragraphs: 1em,
-)
-
-// Параметры страницы
-#let page_config = (
-    numbering: "1",
-    number_align: center,
-    margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
-)
-
-// Параметры содержания
-#let toc_config = (
-    title: "СОДЕРЖАНИЕ",
-    align: center,
-)
-
-// Параметры заголовков
-#let heading_config = (
-    numbering: "1.1",
-    size: font_config.size + 2pt,
-    spacing_after: font_config.size - 4pt,
-)
-
-
-// Параметры таблиц
-#let table_config = (
-    caption_vertical_space: 5pt,
-    align: left,
-    caption_position: top,
-)
-
-// Параметры блоков кода
-#let code_block_config = (
-    caption_vertical_space: 5pt,
-    align: left,
-    caption_position: top,
-)
 
 #let bmstu_config(content) = {
-    set text(size: font_config.size, font: font_config.font, lang: document_language)
-
-    set par(
-        justify: paragraph_config.justify,
-        first-line-indent: (amount: paragraph_config.indent, all: true),
-        leading: paragraph_config.spacing_between_lines,
-        spacing: paragraph_config.spacing_between_paragraphs,
+    /**
+     * Настройка шрифта и языка документа
+     */
+    set text(
+        font: "Times New Roman",
+        lang: "ru",
+        size: 14pt,
     )
 
-    set page(margin: page_config.margin, numbering: page_config.numbering, number-align: page_config.number_align)
-
-    set outline(title: toc_config.title)
-    show outline: it => {
-        show heading: set align(toc_config.align)
-        it
-    }
-
-    set heading(numbering: heading_config.numbering)
-    show heading: it => {
-        set text(size: heading_config.size)
-        it
-        v(heading_config.spacing_after)
-    }
-
-    set figure.caption(separator: [ --- ])
-    show figure.where(kind: image): set figure.caption(position: bottom)
-
-    // Настройка таблиц
-    show figure.where(kind: table): set figure(gap: table_config.caption_vertical_space)
-    show figure.where(kind: table): set figure.caption(position: table_config.caption_position)
-    show figure.where(kind: table): it => align(table_config.align)[#it]
-
-    // Настройка блоков кода
-    show figure.where(kind: raw): it => align(code_block_config.align)[#it]
-    show figure.where(kind: raw): set figure.caption(position: code_block_config.caption_position)
+    /**
+     * Настройка абзацев
+     */
+    set par(
+        first-line-indent: (
+            amount: 1.25cm,
+            all: true,
+        ),
+        justify: true,
+        leading: 1em,
+        spacing: 1em,
+    )
 
     /**
-     * TODO: Настроить содержание
-     * TODO: Настроить списки
+     * Настройка страницы
+     */
+    set page(
+        margin: (
+            left: 30mm,
+            right: 10mm,
+            top: 20mm,
+            bottom: 20mm,
+        ),
+        number-align: center,
+        numbering: "1",
+    )
+
+    /**
+     * Настройка содержания
+     */
+    set outline(title: "СОДЕРЖАНИЕ")
+    show outline: set align(center)
+
+    /**
+     * Настройка заголовков
+     */
+    set heading(numbering: "1.1")
+    show heading: it => {
+        set text(size: 16pt, hyphenate: false)
+        pad(left: 1.25cm, it)
+        v(10pt)
+    }
+
+    /**
+     * Настройка подписей к фигурам
+     */
+    set figure.caption(separator: [ --- ])
+    show figure.where(kind: image): it => {
+        set figure.caption(position: bottom)
+        it
+    }
+
+    /**
+     * Настройка таблиц
+     * TODO: Добавить подписи к продолжениям таблиц, рисунков и листингов, если они переносятся на следующую страницу
+     */
+    show figure.where(kind: table): set figure(gap: 6pt)
+    show figure.where(kind: table): it => {
+        set block(breakable: true)
+        set figure.caption(position: top)
+        align(left, it)
+    }
+
+    /**
+     * Настройка блоков кода, вложенных в figure
+     */
+    show figure.where(kind: raw): it => {
+        set figure.caption(position: bottom)
+        it
+    }
      * TODO: Настроить формулы
      * TODO: Настроить таблицы
      * TODO: Настроить заголовки
