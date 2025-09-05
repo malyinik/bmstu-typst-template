@@ -1,4 +1,5 @@
 #import "template/bmstu.typ": *
+#import "@preview/rufish:0.1.0": rufish, types // Можно удалить, нужен только для примера текста
 
 #titlepage.create(
     author: "Автор",
@@ -43,11 +44,11 @@
 
 = Заголовок первого уровня
 
-#lorem(20)
+#rufish(20, type: types.nikitin)
 
 #heading(numbering: none, level: 2, outlined: false)[Не отслеживаемый заголовок второго уровня без номера]
 
-#lorem(50)
+#rufish(50, type: types.nikitin)
 
 #figure(image("template/images/bmstu_logo.svg", width: 50%), caption: "Герб МГТУ", supplement: "Рисунок")<img-Герб>
 
@@ -57,9 +58,8 @@
 - @img-Герб[Фотографии]
 - см. @img-Герб
 
-#lorem(17)
+#rufish(17, type: types.nikitin)
 
-#pagebreak()
 #figure(
     table(
         columns: (50%, 25%, 25%),
@@ -70,6 +70,18 @@
     ),
     caption: "Подпись к таблице",
 )
+
+#align(center, figure(
+    table(
+        columns: (25%, 45%),
+        align: (right + horizon, left),
+        rows: auto,
+        table.header([Колонка], [Описание]),
+        [#rufish(2, type: types.nikitin)], [#rufish(10, type: types.nikitin)],
+        [Текст],
+    ),
+    caption: "Подпись к таблице",
+))
 
 #figure(
     ```cpp
@@ -86,7 +98,7 @@
 
 Ссылка на @lst-Цикл[листинг].
 
-#lorem(30)
+#rufish(23, type: types.nikitin)
 $
     "Формула:" mat(
         a, b, c;
@@ -95,8 +107,6 @@ $
 $
 
 == Заголовок второго уровня
-
-#lorem(60)
 
 #[
     #set par(justify: false)
@@ -114,39 +124,47 @@ $
 
 В таблице с переносом (@таблица-с-переносом[таблица]) у первой строки на следующей странице остаётся пустая ячейка.
 
-#lorem(50)
+#rufish(50, type: types.nikitin)
 
 === Заголовок третьего уровня
 
-#lorem(75)
+#rufish(75, type: types.nikitin)
 
-#lorem(50)
+#rufish(50, type: types.nikitin)
 
 == Списки
 
-#lorem(25)
+#rufish(25, type: types.nikitin)
 
 - Пункт 1
 - Пункт 2
     - Подпункт 1
     - Подпункт 2
+    - Подпункт 3
+    + Подпункт 1
+    + Подпункт 2
+    + Подпункт 3
 - Пункт 3
     - Подпункт 1
         - Подподпункт 1
 
-#lorem(55)
+#rufish(55, type: types.nikitin)
 
 + Пункт 1
 + Пункт 2
     + Подпункт 1
     + Подпункт 2
+    + Подпункт 3
+    + Подпункт 4
+        + Подподпункт 1
+        + Подподпункт 2
 + Пункт 3
     + Подпункт 1
         + Подподпункт 1
 
-#lorem(55)
+#rufish(55, type: types.nikitin)
 
 #pagebreak()
 #align(center, heading(numbering: none)[ЗАКЛЮЧЕНИЕ])
 
-#lorem(120)
+#rufish(120, type: types.nikitin)

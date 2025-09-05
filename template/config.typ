@@ -120,17 +120,34 @@
 
     /**
      * Настройка списков
-     * TODO: Нумерация вложенных списков кириллическими буквами
      */
+
+    // @typstyle off
+    let rus_letters = ("а", "б", "в", "г", "д", "е", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я")
+    // @typstyle on
+    let enum-numbering(n) = { [#rus_letters.at(n - 1))] }
+
     set list(
         indent: 1.25cm,
         marker: [--],
     )
+    show list: it => {
+        set enum(numbering: enum-numbering)
+        it
+    }
 
     set enum(
         indent: 1.25cm,
         numbering: "1.a)",
     )
+    // Нумерация вложенных списков кириллическими буквами
+    show enum: outer => {
+        show enum: inner => {
+            set enum(numbering: enum-numbering)
+            inner
+        }
+        outer
+    }
 
     /**
      * TODO: Настроить формулы
