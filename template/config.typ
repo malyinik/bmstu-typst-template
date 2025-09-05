@@ -52,8 +52,12 @@
     set heading(numbering: "1.1")
     show heading: it => {
         set text(size: 16pt, hyphenate: false)
-        pad(left: 1.25cm, it)
-        v(10pt)
+        v(2em, weak: true)
+        pad(
+            left: 1.25cm,
+            it,
+        )
+        v(2em, weak: true)
     }
 
     /**
@@ -78,12 +82,16 @@
     /**
      * Настройка таблиц
      * TODO: Добавить подписи к продолжениям таблиц, рисунков и листингов, если они переносятся на следующую страницу
+     * BUG: Заголовок таблицы может остаться на предыдущей странице
      */
-    show figure.where(kind: table): set figure(gap: 6pt)
     show figure.where(kind: table): it => {
         set block(breakable: true)
         set figure.caption(position: top)
-        align(left, it)
+        block(align(left)[
+            #it.caption
+            #v(6pt, weak: true)
+            #it.body
+        ])
     }
 
     /**
