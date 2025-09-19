@@ -76,9 +76,8 @@
     /**
      * Настройка подписей к фигурам
      */
-    set figure.caption(separator: [ --- ])
+    set figure.caption(separator: [~---~])
     show figure.caption: set par(leading: 0.5em, justify: true)
-    show figure.where(kind: image): set figure(supplement: [Рисунок])
     show figure.where(kind: image): it => {
         set figure.caption(position: bottom)
         it
@@ -142,7 +141,7 @@
 
     set list(
         indent: 1.25cm,
-        marker: [--],
+        marker: [---],
     )
     show list: it => {
         set enum(numbering: enum-numbering)
@@ -151,7 +150,7 @@
 
     set enum(
         indent: 1.25cm,
-        numbering: "1.a)",
+        numbering: "1)",
     )
     // Нумерация вложенных списков кириллическими буквами
     show enum: outer => {
