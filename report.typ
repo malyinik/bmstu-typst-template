@@ -6,7 +6,7 @@
     group: "Группа",
 )[
     #titlepage.header(
-        faculty: "Информатика, искусственный интеллект и системы управления",
+        faculty: "Информатика и системы управления",
         department: "Программное обеспечение ЭВМ и информационные технологии",
         field_of_study: "09.03.04 Программная инженерия", // Необязательное поле, можно удалить
     )
@@ -38,7 +38,6 @@
 #show: config.bmstu_config
 
 #outline()
-#pagebreak()
 
 #align(center, heading(numbering: none)[ОСНОВНАЯ ЧАСТЬ])
 
@@ -50,7 +49,11 @@
 
 #rufish(50, type: types.nikitin)
 
-#figure(image("template/images/bmstu_logo.svg", width: 50%), caption: "Герб МГТУ", supplement: "Рисунок")<img-Герб>
+#figure(
+    image("template/images/bmstu_logo.svg", width: 50%),
+    caption: "Герб МГТУ",
+    supplement: "Рисунок",
+)<img-Герб>
 
 Ссылки:
 - @img-Герб[Рисунке]
@@ -163,6 +166,70 @@ $
         + Подподпункт 1
 
 #rufish(55, type: types.nikitin)
+
+
+
+= #rufish(12, type: types.nikitin)
+
+#rufish(36, type: types.nikitin)
+
+#rufish(48, type: types.orlov)
+
+== #rufish(9, type: types.lorka)
+
+#rufish(32, type: types.lorka)
+
+#rufish(44, type: types.nikitin)
+
+=== #rufish(8, type: types.orlov)
+
+#rufish(38, type: types.orlov)
+
+#rufish(27, type: types.lorka)
+
+
+
+= #rufish(13, type: types.orlov)
+
+#rufish(40, type: types.orlov)
+
+#rufish(52, type: types.nikitin)
+
+== #rufish(10, type: types.nikitin)
+
+#rufish(34, type: types.nikitin)
+
+#rufish(46, type: types.lorka)
+
+=== #rufish(7, type: types.lorka)
+
+#rufish(28, type: types.orlov)
+
+=== #rufish(6, type: types.orlov)
+
+#rufish(30, type: types.nikitin)
+
+
+
+= #rufish(11, type: types.lorka)
+
+#rufish(42, type: types.lorka)
+
+#rufish(55, type: types.orlov)
+
+== #rufish(14, type: types.orlov)
+
+#rufish(33, type: types.nikitin)
+
+#rufish(41, type: types.orlov)
+
+=== #rufish(5, type: types.nikitin)
+
+#rufish(29, type: types.nikitin)
+
+== #rufish(8, type: types.nikitin)
+
+#rufish(35, type: types.lorka)
 
 #pagebreak()
 #align(center, heading(numbering: none)[ЗАКЛЮЧЕНИЕ])
