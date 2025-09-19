@@ -44,7 +44,20 @@
      * Настройка содержания
      */
     set outline(title: "СОДЕРЖАНИЕ")
-    show outline: set align(center)
+    show outline: it => {
+        show heading: it => {
+            align(center, it)
+            v(10pt, weak: true)
+        }
+        it
+        pagebreak()
+    }
+    set outline.entry(fill: repeat(text(weight: "regular")[.], gap: 0.2em))
+    show outline.entry.where(level: 1): it => {
+        v(1.5em, weak: true)
+        set text(weight: "bold")
+        it
+    }
 
     /**
      * Настройка заголовков
