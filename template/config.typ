@@ -180,6 +180,19 @@
     show sym.lt.eq: sym.lt.slant
     show sym.gt.eq: sym.gt.slant
 
+    /**
+     * Настройка библиографии
+     */
+    set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ])
+    show bibliography: it => {
+        pagebreak(weak: true)
+        show heading: title => {
+            align(center, title)
+            v(1em, weak: true)
+        }
+        it
+    }
+
     content
 }
 
