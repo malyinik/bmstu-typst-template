@@ -167,8 +167,18 @@
     }
 
     /**
-     * TODO: Настроить формулы
+     * Настройка формул
      */
+    show math.equation: i-figured.show-equation // Нумерация по заголовкам
+    show sym.integral: math.limits
+    show sym.integral.double: math.limits
+    show sym.integral.triple: math.limits
+    show sym.integral.quad: math.limits
+    show sym.integral.cont: math.limits
+    show sym.integral.surf: math.limits
+    show sym.integral.vol: math.limits
+    show sym.lt.eq: sym.lt.slant
+    show sym.gt.eq: sym.gt.slant
 
     content
 }
