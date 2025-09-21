@@ -1,6 +1,6 @@
 #import "widgets.typ"
 
-#import "@preview/codly:1.3.0": *
+#import "@preview/codly:1.3.0"
 #import "@preview/codly-languages:0.1.8": *
 
 #let bmstu_config(content) = {
@@ -119,8 +119,8 @@
         it
     }
 
-    show: codly-init
-    codly(
+    show: codly.codly-init
+    codly.codly(
         display-icon: false,
         display-name: false,
         languages: codly-languages,
