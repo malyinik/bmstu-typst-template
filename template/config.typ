@@ -2,6 +2,7 @@
 
 #import "@preview/codly:1.3.0"
 #import "@preview/codly-languages:0.1.8": *
+#import "@preview/i-figured:0.2.4"
 
 #let bmstu_config(content) = {
     /**
@@ -72,6 +73,7 @@
         )
         v(2em, weak: true)
     }
+    show heading: i-figured.reset-counters
 
     /**
      * Настройка подписей к фигурам
@@ -87,6 +89,7 @@
     /**
      * Общие настройки для всех фигур
      */
+    show figure: i-figured.show-figure // Нумерация по заголовкам
     show figure: it => {
         set block(breakable: true)
         v(1.5em, weak: true)
