@@ -45,12 +45,12 @@
      */
     set outline(title: "СОДЕРЖАНИЕ")
     show outline: it => {
-        show heading: it => {
-            align(center, it)
-            v(10pt, weak: true)
+        show heading: title => {
+            align(center, title)
+            v(1em, weak: true)
         }
         it
-        pagebreak()
+        pagebreak(weak: true)
     }
     set outline.entry(fill: repeat(text(weight: "regular")[.], gap: 0.2em))
     show outline.entry.where(level: 1): it => {
@@ -88,8 +88,10 @@
      * Общие настройки для всех фигур
      */
     show figure: it => {
+        set block(breakable: true)
+        v(1.5em, weak: true)
         it
-        v(0.5em)
+        v(1.5em, weak: true)
     }
 
     /**
@@ -98,13 +100,12 @@
      * BUG: Заголовок таблицы может остаться на предыдущей странице
      */
     show figure.where(kind: table): it => {
-        set block(breakable: true)
         set figure.caption(position: top)
-        block(align(left)[
-            #it.caption
-            #v(6pt, weak: true)
-            #it.body
-        ])
+        show figure.caption: it => {
+            align(left, it)
+            v(-0.2em, weak: false)
+        }
+        it
     }
 
     /**
