@@ -47,21 +47,18 @@
 
 #heading(numbering: none, level: 2, outlined: false)[Не отслеживаемый заголовок второго уровня без номера]
 
-#rufish(50, type: types.nikitin)
-
 #figure(
-    image("template/images/bmstu_logo.svg", width: 50%),
+    image("template/images/bmstu_logo.svg", width: 57%),
     caption: "Герб МГТУ",
-    supplement: "Рисунок",
-)<img-Герб>
+)<Герб>
 
 Ссылки:
-- @img-Герб[Рисунке]
-- @img-Герб[Изображении]
-- @img-Герб[Фотографии]
-- см. @img-Герб
+- @fig:Герб[Рисунке]
+- @fig:Герб[Изображении]
+- @fig:Герб[Фотографии]
+- см. @fig:Герб
 
-#rufish(17, type: types.nikitin)
+#rufish(36, type: types.nikitin)
 
 #figure(
     table(
@@ -97,17 +94,11 @@
     }
     ```,
     caption: [Длинная подпись к блоку кода, занимающая несколько строк (межстрочный интервал меньше)],
-)<lst-Цикл>
+)<Цикл>
 
-Ссылка на @lst-Цикл[листинг].
+Ссылка на @lst:Цикл[листинг]. Ссылка на электронный ресурс @dc_bmstu.
 
-#rufish(23, type: types.nikitin)
-$
-    "Формула:" mat(
-        a, b, c;
-        x, x + y, x + y + z;
-    )
-$
+#rufish(50, type: types.nikitin)
 
 == Заголовок второго уровня
 
@@ -125,13 +116,24 @@ $
     )<таблица-с-переносом>
 ]
 
-В таблице с переносом (@таблица-с-переносом[таблица]) у первой строки на следующей странице остаётся пустая ячейка.
+В таблице с переносом (@tbl:таблица-с-переносом[таблица]) у первой строки на следующей странице остаётся пустая ячейка.
 
 #rufish(50, type: types.nikitin)
 
 === Заголовок третьего уровня
 
 #rufish(75, type: types.nikitin)
+
+$
+    mat(
+        a, b, c;
+        x, x + y, x + y + z;
+    ) & = \
+      & = lim_(n -> infinity) sum_(i=1)^n (f(x_i) dot delta x) \
+      & = integral.surf_a^b
+$<многострочная-формула>
+
+Ссылка на @eqt:многострочная-формула[формулу].
 
 #rufish(50, type: types.nikitin)
 
@@ -179,19 +181,42 @@ $
 
 #rufish(32, type: types.lorka)
 
+#figure(
+    image("template/images/bmstu_logo.svg", width: 30%),
+    caption: "Герб МГТУ",
+)
+
+#figure(
+    table(
+        columns: (20%, 40%, 40%),
+        table.header([Заголовок 1], [Заголовок 2], [Заголовок 3]),
+        [#rufish(3, type: types.orlov)], [#rufish(11, type: types.orlov)], [#rufish(8, type: types.orlov)],
+    ),
+    caption: [Подпись к таблице],
+)
+
 #rufish(44, type: types.nikitin)
 
 === #rufish(8, type: types.orlov)
 
-#rufish(38, type: types.orlov)
+#rufish(60, type: types.orlov)
+
+#figure(
+    table(
+        columns: (20%, 40%, 40%),
+        table.header([Заголовок 1], [Заголовок 2], [Заголовок 3]),
+        [#rufish(3, type: types.orlov)], [#rufish(11, type: types.orlov)], [#rufish(8, type: types.orlov)],
+    ),
+    caption: [Подпись к таблице],
+)
 
 #rufish(27, type: types.lorka)
-
-
 
 = #rufish(13, type: types.orlov)
 
 #rufish(40, type: types.orlov)
+
+$ integral_0^1 x^2 d x = 1/3 $
 
 #rufish(52, type: types.nikitin)
 
@@ -207,6 +232,14 @@ $
 
 === #rufish(6, type: types.orlov)
 
+$
+    cases(
+        & 1\, & "если" x > 0,
+        & 0\, & "если" x = 0,
+        - & 1\, & "если" x < 0,
+    )
+$
+
 #rufish(30, type: types.nikitin)
 
 
@@ -216,6 +249,16 @@ $
 #rufish(42, type: types.lorka)
 
 #rufish(55, type: types.orlov)
+
+#pagebreak()
+#figure(
+    table(
+        columns: (20%, 40%, 40%),
+        table.header([Заголовок 1], [Заголовок 2], [Заголовок 3]),
+        [#rufish(3, type: types.orlov)], [#rufish(11, type: types.orlov)], [#rufish(8, type: types.orlov)],
+    ),
+    caption: [Подпись к таблице],
+)
 
 == #rufish(14, type: types.orlov)
 
@@ -235,3 +278,5 @@ $
 #align(center, heading(numbering: none)[ЗАКЛЮЧЕНИЕ])
 
 #rufish(120, type: types.nikitin)
+
+#bibliography("bibliography.yml")
