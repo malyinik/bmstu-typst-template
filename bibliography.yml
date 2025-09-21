@@ -1,0 +1,4 @@
+dc_bmstu:
+  type: web
+  title: "Цифровая кафедра МГТУ им. Н. Э. Баумана"
+  url: {value: 'https://dc.bmstu.ru', date: '2025-09-21'}

@@ -1,7 +1,8 @@
 #import "widgets.typ"
 
-#import "@preview/codly:1.3.0": *
+#import "@preview/codly:1.3.0"
 #import "@preview/codly-languages:0.1.8": *
+#import "@preview/i-figured:0.2.4"
 
 #let bmstu_config(content) = {
     /**
@@ -45,12 +46,12 @@
      */
     set outline(title: "СОДЕРЖАНИЕ")
     show outline: it => {
-        show heading: it => {
-            align(center, it)
-            v(10pt, weak: true)
+        show heading: title => {
+            align(center, title)
+            v(1em, weak: true)
         }
         it
-        pagebreak()
+        pagebreak(weak: true)
     }
     set outline.entry(fill: repeat(text(weight: "regular")[.], gap: 0.2em))
     show outline.entry.where(level: 1): it => {
@@ -72,6 +73,7 @@
         )
         v(2em, weak: true)
     }
+    show heading: i-figured.reset-counters
 
     /**
      * Настройка подписей к фигурам
@@ -86,9 +88,12 @@
     /**
      * Общие настройки для всех фигур
      */
+    show figure: i-figured.show-figure // Нумерация по заголовкам
     show figure: it => {
+        set block(breakable: true)
+        v(1.5em, weak: true)
         it
-        v(0.5em)
+        v(1.5em, weak: true)
     }
 
     /**
@@ -97,13 +102,12 @@
      * BUG: Заголовок таблицы может остаться на предыдущей странице
      */
     show figure.where(kind: table): it => {
-        set block(breakable: true)
         set figure.caption(position: top)
-        block(align(left)[
-            #it.caption
-            #v(6pt, weak: true)
-            #it.body
-        ])
+        show figure.caption: it => {
+            align(left, it)
+            v(-0.2em, weak: false)
+        }
+        it
     }
 
     /**
@@ -117,8 +121,8 @@
         it
     }
 
-    show: codly-init
-    codly(
+    show: codly.codly-init
+    codly.codly(
         display-icon: false,
         display-name: false,
         languages: codly-languages,
@@ -162,8 +166,31 @@
     }
 
     /**
-     * TODO: Настроить формулы
+     * Настройка формул
      */
+    show math.equation: i-figured.show-equation // Нумерация по заголовкам
+    show sym.integral: math.limits
+    show sym.integral.double: math.limits
+    show sym.integral.triple: math.limits
+    show sym.integral.quad: math.limits
+    show sym.integral.cont: math.limits
+    show sym.integral.surf: math.limits
+    show sym.integral.vol: math.limits
+    show sym.lt.eq: sym.lt.slant
+    show sym.gt.eq: sym.gt.slant
+
+    /**
+     * Настройка библиографии
+     */
+    set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ])
+    show bibliography: it => {
+        pagebreak(weak: true)
+        show heading: title => {
+            align(center, title)
+            v(1em, weak: true)
+        }
+        it
+    }
 
     content
 }
