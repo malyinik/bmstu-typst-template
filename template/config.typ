@@ -1,5 +1,3 @@
-#import "widgets.typ"
-
 #import "@preview/codly:1.3.0"
 #import "@preview/codly-languages:0.1.8": *
 #import "@preview/i-figured:0.2.4"
@@ -9,7 +7,7 @@
      * Настройка шрифта и языка документа
      */
     set text(
-        font: "Times New Roman",
+        font: "New Computer Modern",
         lang: "ru",
         size: 14pt,
     )
@@ -80,6 +78,7 @@
      */
     set figure.caption(separator: [~---~])
     show figure.caption: set par(leading: 0.5em, justify: true)
+    show figure.where(kind: image): set figure(supplement: [Рисунок])
     show figure.where(kind: image): it => {
         set figure.caption(position: bottom)
         it
