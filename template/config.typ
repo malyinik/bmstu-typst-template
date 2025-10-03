@@ -103,6 +103,7 @@
     show figure.where(kind: table): it => {
         set figure.caption(position: top)
         show figure.caption: it => {
+            set block(sticky: true)
             align(left, it)
             v(-0.2em, weak: false)
         }
