@@ -168,6 +168,11 @@
     /**
      * Настройка формул
      */
+    show math.equation.where(block: true): it => {
+        v(2em, weak: true)
+        it
+        v(2em, weak: true)
+    }
     show math.equation: i-figured.show-equation // Нумерация по заголовкам
     show sym.integral: math.limits
     show sym.integral.double: math.limits
