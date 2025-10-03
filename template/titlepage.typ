@@ -2,17 +2,19 @@
 
 #let header(faculty: "", department: "", field_of_study: "") = {
     grid(
-        columns: (19%, 81%),
-        align: (left, center),
-        box[
-            #image("images/bmstu_logo.svg", width: 100%)
+        columns: (auto, auto),
+        align: (left, center + horizon),
+        column-gutter: -1mm,
+        inset: (left: -4mm),
+        [
+            #image("images/bmstu_logo.svg", height: 36mm)
         ],
-        box[
+        [
             #set text(weight: "bold")
             #set par(leading: 0.5em)
             Министерство науки и высшего образования Российской Федерации \
-            Федеральное государственное автономное образовательное учреждение \
-            высшего образования \
+            Федеральное государственное автономное образовательное \
+            учреждение высшего образования \
             "Московский государственный технический университет \
             имени Н.~Э.~Баумана \
             (национальный исследовательский университет)" \
@@ -20,15 +22,27 @@
         ],
     )
 
-    v(-1.3mm)
-    line(length: 100%, stroke: 0.9mm)
     v(-3.2mm)
+    line(length: 100%, stroke: 0.9mm)
+    v(-2.9mm)
     line(length: 100%, stroke: 0.2mm)
     v(1.8mm)
 
-    widgets.form_field(label: "ФАКУЛЬТЕТ", value: ["#faculty"], hint: "", length: 100%, align: left)
+    widgets.form_field(
+        label: "ФАКУЛЬТЕТ",
+        value: ["#faculty"],
+        hint: "",
+        length: 100%,
+        align: left,
+    )
     v(-2.5mm)
-    widgets.form_field(label: "КАФЕДРА", value: ["#department"], hint: "", length: 100%, align: left)
+    widgets.form_field(
+        label: "КАФЕДРА",
+        value: ["#department"],
+        hint: "",
+        length: 100%,
+        align: left,
+    )
     v(-2.5mm)
     if field_of_study != "" {
         widgets.form_field(
@@ -55,20 +69,35 @@
 }
 
 #let create(
-    author: "Автор",
-    group: "Группа",
-    year: 2025,
+    city: "",
+    year: datetime.today().year(),
     doc,
 ) = {
-    set par(justify: false, first-line-indent: 0pt, spacing: 1em)
-    set text(size: 12pt, font: "Times New Roman", lang: "ru")
+    set par(
+        justify: false,
+        first-line-indent: 0pt,
+        spacing: 1em,
+    )
+    set text(
+        size: 11pt,
+        font: "New Computer Modern",
+        lang: "ru",
+    )
     set page(
-        margin: (left: 30mm, right: 10mm, top: 20mm, bottom: 20mm),
+        margin: (
+            left: 30mm,
+            right: 10mm,
+            top: 20mm,
+            bottom: 20mm,
+        ),
         numbering: none,
         footer: [
             #set align(center)
             #set text(size: 14pt, style: "italic")
-            #datetime.today().year() г.
+            #if city != "" {
+                [#city,]
+            }
+            #year~г.
         ],
         footer-descent: 0cm,
     )

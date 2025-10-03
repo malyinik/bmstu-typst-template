@@ -2,8 +2,8 @@
 #import "@preview/rufish:0.1.0": rufish, types // Можно удалить, нужен только для примера текста
 
 #titlepage.create(
-    author: "Автор",
-    group: "Группа",
+    city: "Москва", // Можно указать город
+    year: 2025, // Можно вручную указать год
 )[
     #titlepage.header(
         faculty: "Информатика и системы управления",
@@ -25,13 +25,43 @@
         columns: (40%, 30%, 30%),
         align: (left, right, right),
         row-gutter: 7mm,
-        [#widgets.form_field(label: "Студент", value: "ИУ7-41Б", hint: "(Группа)", length: 25mm)],
-        [#widgets.form_field(label: "", value: "", hint: "(Подпись, дата)", length: 95%)],
-        [#widgets.form_field(label: "", value: "И. О. Фамилия", hint: "(И. О. Фамилия)", length: 95%)],
+        [#widgets.form_field(
+            label: "Студент",
+            value: "ИУ7-41Б",
+            hint: "(Группа)",
+            length: 25mm,
+        )],
+        [#widgets.form_field(
+            label: "",
+            value: "",
+            hint: "(Подпись, дата)",
+            length: 95%,
+        )],
+        [#widgets.form_field(
+            label: "",
+            value: "И. О. Фамилия",
+            hint: "(И. О. Фамилия)",
+            length: 95%,
+        )],
 
-        [#widgets.form_field(label: "Преподаватель", value: "", hint: "", length: 0mm)],
-        [#widgets.form_field(label: "", value: "", hint: "(Подпись, дата)", length: 95%)],
-        [#widgets.form_field(label: "", value: "И. О. Фамилия", hint: "(И. О. Фамилия)", length: 95%)],
+        [#widgets.form_field(
+            label: "Преподаватель",
+            value: "",
+            hint: "",
+            length: 0mm,
+        )],
+        [#widgets.form_field(
+            label: "",
+            value: "",
+            hint: "(Подпись, дата)",
+            length: 95%,
+        )],
+        [#widgets.form_field(
+            label: "",
+            value: "И. О. Фамилия",
+            hint: "(И. О. Фамилия)",
+            length: 95%,
+        )],
     ))
 ]
 
