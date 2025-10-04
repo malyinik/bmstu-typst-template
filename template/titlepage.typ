@@ -4,7 +4,6 @@
     grid(
         columns: (auto, auto),
         align: (left, center + horizon),
-        column-gutter: -1mm,
         inset: (left: -4mm),
         [
             #image("images/bmstu_logo.svg", height: 36mm)
