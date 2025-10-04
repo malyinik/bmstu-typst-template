@@ -67,11 +67,7 @@
     place(bottom, dy: -3cm, content)
 }
 
-#let create(
-    city: "",
-    year: datetime.today().year(),
-    doc,
-) = {
+#let create(doc) = {
     set par(
         justify: false,
         first-line-indent: 0pt,
@@ -91,12 +87,11 @@
         ),
         numbering: none,
         footer: [
-            #set align(center)
-            #set text(size: 14pt, style: "italic")
-            #if city != "" {
-                [#city,]
-            }
-            #year~г.
+            #align(center, text(
+                [
+                    Москва, #datetime.today().year()
+                ],
+            ))
         ],
         footer-descent: 0cm,
     )

@@ -9,7 +9,7 @@
     set text(
         font: "New Computer Modern",
         lang: "ru",
-        size: 14pt,
+        size: 12pt,
     )
 
     /**
@@ -98,8 +98,6 @@
 
     /**
      * Настройка таблиц
-     * TODO: Добавить подписи к продолжениям таблиц, рисунков и листингов, если они переносятся на следующую страницу
-     * BUG: Заголовок таблицы может остаться на предыдущей странице
      */
     show figure.where(kind: table): it => {
         set figure.caption(position: top)
@@ -116,7 +114,6 @@
      */
     show figure.where(kind: "i-figured-raw"): it => {
         set block(breakable: true)
-        show figure.caption: set text(size: 14pt)
         set text(size: 12pt)
         block(it.body, sticky: true)
         it.caption

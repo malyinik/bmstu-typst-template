@@ -1,4 +1,17 @@
-dc_bmstu:
+veretennikov2015:
+  type: book
+  title: "Практикум по линейной алгебре"
+  genre: "учеб. пособие"
+  author: "Веретенников В. Н."
+  publisher:
+    name: "РГГМУ"
+    location: "Санкт-Петербург"
+  date: 2015
+  page-total: 140
+  language: ru
+lilaq:
   type: web
-  title: "Цифровая кафедра МГТУ им. Н. Э. Баумана"
-  url: {value: 'https://dc.bmstu.ru', date: '2025-09-21'}
+  title: "Lilaq. Advanced data visualization in Typst."
+  url:
+    value: "https://lilaq.org/"
+    date: 2025-09-25
