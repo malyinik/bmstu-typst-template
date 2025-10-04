@@ -194,9 +194,18 @@
         pagebreak(weak: true)
         show heading: title => {
             align(center, title)
-            v(1em, weak: true)
+            v(2em, weak: true)
+        }
+        show link: it => context {
+            let size = measure(it)
+            if size.width < (page.width - page.margin.left - page.margin.right) {
+                box(it)
+            } else {
+                it
+            }
         }
         it
+        pagebreak(weak: true)
     }
 
     content
