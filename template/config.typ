@@ -21,6 +21,7 @@
             all: true,
         ),
         justify: true,
+        linebreaks: "simple",
         leading: 1em,
         spacing: 1em,
     )
