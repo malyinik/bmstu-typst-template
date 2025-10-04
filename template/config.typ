@@ -80,9 +80,9 @@
     set figure.caption(separator: [~---~])
     show figure.caption: set par(leading: 0.5em, justify: true)
     show figure.where(kind: image): set figure(supplement: [Рисунок])
-    show figure.where(kind: image): it => {
-        set figure.caption(position: bottom)
-        it
+    show figure.where(kind: "i-figured-image"): it => {
+        block(it.body, sticky: true)
+        it.caption
     }
 
     /**
@@ -114,12 +114,12 @@
     /**
      * Настройка блоков кода, вложенных в figure
      */
-    show figure.where(kind: raw): it => {
+    show figure.where(kind: "i-figured-raw"): it => {
         set block(breakable: true)
-        set figure.caption(position: bottom)
         show figure.caption: set text(size: 14pt)
         set text(size: 12pt)
-        it
+        block(it.body, sticky: true)
+        it.caption
     }
 
     show: codly.codly-init
@@ -128,6 +128,7 @@
         display-name: false,
         languages: codly-languages,
         number-align: right,
+        radius: 0pt,
         skip-line: align(center, "..."),
         skip-number: align(left, "..."),
         smart-skip: true,
