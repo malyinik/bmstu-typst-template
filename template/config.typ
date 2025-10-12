@@ -118,8 +118,7 @@
         set block(breakable: true)
         show figure.caption: set text(size: 14pt)
         set text(size: 12pt)
-        block(it.body, sticky: true)
-        it.caption
+        it
     }
 
     show: codly.codly-init
