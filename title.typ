@@ -11,11 +11,16 @@
             #text(weight: "bold", size: 20pt, [Лабораторная работа № N \ по дисциплине "Анализ алгоритмов"])
         ])
         #v(33mm)
-        #widgets.form_field(
+        #let label = [*Тема*]
+        #let theme = []
+        #context widgets.form_field(
             font_size: 14pt,
-            label: [*Тема*],
-            value: [],
-            length: 7.3cm,
+            label: label,
+            value: theme,
+            length: calc.min(
+              measure(theme).width + 10pt,
+              page.width - page.margin.left - page.margin.right - measure(label).width - 1mm
+            ),
             hint: "",
         )
         #v(1em)
