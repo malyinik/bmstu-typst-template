@@ -13,13 +13,14 @@
         #v(33mm)
         #let label = [*Тема*]
         #let theme = []
+        #let font_size = 14pt
         #context widgets.form_field(
-            font_size: 14pt,
+            font_size: font_size,
             label: label,
             value: theme,
             length: calc.min(
               measure(theme).width + 10pt,
-              page.width - page.margin.left - page.margin.right - measure(label).width - 1mm
+              page.width - page.margin.left - page.margin.right - measure(label).width - 0.4 * font_size
             ),
             hint: "",
         )
