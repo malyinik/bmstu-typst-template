@@ -115,8 +115,7 @@
     show figure.where(kind: "i-figured-raw"): it => {
         set block(breakable: true)
         set text(size: 12pt)
-        block(it.body, sticky: true)
-        it.caption
+        it
     }
 
     show: codly.codly-init
