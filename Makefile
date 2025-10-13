@@ -1,4 +1,6 @@
-report.pdf: report.typ
+TYPST_FILES := $(wildcard *.typ)
+
+report.pdf: $(TYPST_FILES) 07_references.yml
 	typst compile report.typ
 	make optimize_pdf
 
