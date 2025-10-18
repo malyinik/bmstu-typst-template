@@ -1,9 +1,7 @@
 #import "template/bmstu.typ": *
-
-#include "00_title.typ"
-
 #show: config.bmstu_config
 
+#include "00_title.typ"
 #outline()
 #include "01_intro.typ"
 #include "02_analytical.typ"
