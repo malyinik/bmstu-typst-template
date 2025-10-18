@@ -121,7 +121,8 @@
   </macro>
   <macro name="publisher">
     <!-- includes place -->
-    <group delimiter=": ">
+    <!-- modified on 2025-10-18 by malyinik: added space before colon per GOST 7.1-2003 4.7.5 -->
+    <group delimiter=" : ">
       <text variable="publisher-place"/>
       <text variable="publisher"/>
     </group>
@@ -161,7 +162,8 @@
       <if type="webpage post-weblog" match="any">
         <choose>
           <if variable="URL">
-            <text variable="URL" prefix="URL: "/>
+            <!-- modified on 2025-10-18 by malyinik: changed "URL:" to "Режим доступа:" per GOST 7.82-2001 for electronic resources -->
+            <text variable="URL" prefix="Режим доступа: "/>
             <group prefix=" (" suffix=")" delimiter=": ">
               <text term="accessed"/>
               <!-- localized date is not used here, since we prefer the Russian date style for entries of all languages -->
@@ -196,7 +198,8 @@
     <layout suffix=".">
       <text variable="citation-number" suffix="."/>
       <!-- Комментарии ниже даны в соответствии с терминами, определёнными в ГОСТе -->
-      <group delimiter=". ">
+      <!-- modified on 2025-10-18 by malyinik: changed delimiter to ". — " per GOST 7.1-2003 4.7.2, 4.7.5 -->
+      <group delimiter=". — ">
         <group>
           <group delimiter=". ">
             <text macro="author"/>
