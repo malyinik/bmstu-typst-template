@@ -65,6 +65,8 @@
      * Настройка заголовков
      */
     set heading(numbering: "1.1")
+    show heading.where(level: 4): set heading(numbering: none, outlined: false)
+    show heading.where(level: 5): set heading(numbering: none, outlined: false)
     show heading: it => {
         set text(size: 16pt, hyphenate: false)
         v(2em, weak: true)
@@ -196,7 +198,7 @@
         }
         show link: it => context {
             let size = measure(it)
-            if size.width < (page.width - page.margin.left - page.margin.right) {
+            if size.width < (page.width - page.margin.left - page.margin.right) * 0.4 {
                 box(it)
             } else {
                 it
