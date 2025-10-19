@@ -1,4 +1,6 @@
 #import "template/bmstu.typ": *
+#show: config.bmstu_config
+
 #import "@preview/rufish:0.1.0": rufish, types // Можно удалить, нужен только для примера текста
 
 #titlepage.create(
@@ -64,8 +66,6 @@
         )],
     ))
 ]
-
-#show: config.bmstu_config
 
 #outline()
 
@@ -271,8 +271,6 @@ $
 $
 
 #rufish(30, type: types.nikitin)
-
-
 
 = #rufish(11, type: types.lorka)
 

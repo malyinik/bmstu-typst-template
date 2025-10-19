@@ -1,10 +1,10 @@
 #import "widgets.typ"
+#import "config.typ": font_name
 
 #let header(faculty: "", department: "", field_of_study: "") = {
     grid(
-        columns: (auto, auto),
+        columns: (17%, 83%),
         align: (left, center + horizon),
-        inset: (left: -4mm),
         [
             #image("images/bmstu_logo.svg", height: 36mm)
         ],
@@ -23,7 +23,11 @@
 
     v(-3.2mm)
     line(length: 100%, stroke: 0.9mm)
-    v(-2.9mm)
+    if lower(font_name) == "times new roman" {
+        v(-3.2mm)
+    } else {
+        v(-2.9mm)
+    }
     line(length: 100%, stroke: 0.2mm)
     v(1.8mm)
 
@@ -77,18 +81,14 @@
         first-line-indent: 0pt,
         spacing: 1em,
     )
-    set text(
-        size: 11pt,
-        font: "New Computer Modern",
-        lang: "ru",
-    )
+
+    let font_size = 11pt
+    if lower(font_name) == "times new roman" {
+        font_size = 12pt
+    }
+    set text(size: font_size)
+
     set page(
-        margin: (
-            left: 30mm,
-            right: 10mm,
-            top: 20mm,
-            bottom: 20mm,
-        ),
         numbering: none,
         footer: [
             #set align(center)

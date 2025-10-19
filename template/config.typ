@@ -2,12 +2,14 @@
 #import "@preview/codly-languages:0.1.8": *
 #import "@preview/i-figured:0.2.4"
 
+#let font_name = "Times New Roman"
+
 #let bmstu_config(content) = {
     /**
      * Настройка шрифта и языка документа
      */
     set text(
-        font: "New Computer Modern",
+        font: (font_name, "New Computer Modern"),
         lang: "ru",
         size: 14pt,
     )
