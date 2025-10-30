@@ -54,7 +54,39 @@
         it
         pagebreak(weak: true)
     }
-    set outline.entry(fill: repeat(text(weight: "regular")[.], gap: 0.2em))
+    // HACK: Чтобы TestVkr.exe корректно читал заголовки в содержании, которые другие программы читают без проблем...
+    show outline.entry: it => context {
+        set par(first-line-indent: (amount: 0cm, all: true))
+
+        let number = if it.element.numbering != none {
+            numbering(it.element.numbering, ..counter(heading).at(it.element.location()))
+        }
+        let title = it.body()
+        let page-num = it.page()
+
+        // Отступы по уровню заголовка
+        if it.level == 1 {
+            h(0em)
+        } else if it.level == 2 {
+            h(measure([1~]).width)
+        } else if it.level == 3 {
+            h(measure([1~1.1~]).width)
+        } else {
+            h(measure([1~1.1~1.1.1~]).width + 0.2em)
+        }
+
+        if number != none {
+            [#number #link(it.element.location(), title)]
+        } else {
+            link(it.element.location(), title)
+        }
+
+        h(0.3em)
+        box(width: 1fr, repeat(text(weight: "regular")[.], gap: 0.2em))
+        h(0.3em)
+        page-num
+        linebreak()
+    }
     show outline.entry.where(level: 1): it => {
         v(1.5em, weak: true)
         set text(weight: "bold")
@@ -68,6 +100,9 @@
     show heading.where(level: 4): set heading(numbering: none, outlined: false)
     show heading.where(level: 5): set heading(numbering: none, outlined: false)
     show heading: it => {
+        // HACK: Чтобы TestVkr.exe корректно читал заголовки в тексте, которые другие программы читают без проблем...
+        place(horizon, rect(width: 100%, height: 100%, stroke: white.transparentize(100%)))
+
         set text(size: 16pt, hyphenate: false)
         v(2em, weak: true)
         pad(
