@@ -1,7 +1,7 @@
 TYPST_FILES := $(wildcard *.typ)
 
-report.pdf: $(TYPST_FILES) 07_references.yml
-	typst compile report.typ
+report.pdf: $(TYPST_FILES) 08_references.yml
+	typst compile --no-pdf-tags report.typ
 	make optimize_pdf
 
 .PHONY: optimize_pdf

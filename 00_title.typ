@@ -1,71 +1,65 @@
 #import "template/bmstu.typ": *
 
 #titlepage.create[
-    #titlepage.header(
-        faculty: "Информатика и системы управления",
-        department: "Программное обеспечение ЭВМ и информационные технологии",
-    )
+  #titlepage.header(
+    faculty: "Информатика и системы управления",
+    department: "Программное обеспечение ЭВМ и информационные технологии",
+  )
 
-    #titlepage.body()[
-        #align(center, [
-            #text(weight: "bold", size: 20pt, [Лабораторная работа № N \ по дисциплине "Анализ алгоритмов"])
-        ])
-        #v(33mm)
-        #let label = [*Тема*]
-        #let theme = []
-        #context widgets.form_field(
-            font_size: 14pt,
-            label: label,
-            value: theme,
-            length: calc.min(
-              measure(theme).width + 10pt,
-              page.width - page.margin.left - page.margin.right - measure(label).width - 0.4em.to-absolute()
-            ),
-            hint: "",
-        )
-        #v(1em)
-    ]
+  #titlepage.body()[
+    #align(center, [
+      #text(size: 18pt)[
+        *РАСЧЁТНО-ПОЯСНИТЕЛЬНАЯ ЗАПИСКА*
 
-    #titlepage.footer(content: grid(
-        columns: (40%, 30%, 30%),
-        align: (left, right, right),
-        row-gutter: 7mm,
-        [#widgets.form_field(
-            label: "Студент",
-            value: "ИУ7-51Б",
-            hint: "(Группа)",
-            length: 25mm,
-        )],
-        [#widgets.form_field(
-            label: "",
-            value: "",
-            hint: "(Подпись, дата)",
-            length: 95%,
-        )],
-        [#widgets.form_field(
-            label: "",
-            value: "И. И. Иванов",
-            hint: "(И. О. Фамилия)",
-            length: 95%,
-        )],
+        _К КУРСОВОЙ РАБОТЕ \ НА ТЕМУ:_
 
-        [#widgets.form_field(
-            label: "Преподаватель",
-            value: "",
-            hint: "",
-            length: 0mm,
-        )],
-        [#widgets.form_field(
-            label: "",
-            value: "",
-            hint: "(Подпись, дата)",
-            length: 95%,
-        )],
-        [#widgets.form_field(
-            label: "",
-            value: "П. П. Петров",
-            hint: "(И. О. Фамилия)",
-            length: 95%,
-        )],
-    ))
+        _"Тема курсовой работы"_
+      ]
+    ])
+    #v(33mm)
+    #v(1em)
+  ]
+
+  #titlepage.footer(content: grid(
+    columns: (44%, 28%, 28%),
+    align: (left, right, right),
+    row-gutter: 7mm,
+    [#widgets.form_field(
+      label: "Студент",
+      value: "ИУ7-51Б",
+      hint: "(Группа)",
+      length: 25mm,
+    )],
+    [#widgets.form_field(
+      label: "",
+      value: "",
+      hint: "(Подпись, дата)",
+      length: 95%,
+    )],
+    [#widgets.form_field(
+      label: "",
+      value: "И. И. Иванов",
+      hint: "(И. О. Фамилия)",
+      length: 95%,
+    )],
+
+    [#widgets.form_field(
+      label: "Руководитель курсовой работы",
+      value: "",
+      hint: "",
+      length: 0mm,
+    )],
+    [#widgets.form_field(
+      label: "",
+      value: "",
+      hint: "(Подпись, дата)",
+      length: 95%,
+    )],
+    [#widgets.form_field(
+      label: "",
+      value: "П. П. Петров",
+      hint: "(И. О. Фамилия)",
+      length: 95%,
+    )],
+  ))
 ]
