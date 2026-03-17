@@ -8,6 +8,7 @@
 **Специализированные ветки:**
 
 - [`subject/algorithm-analysis`](https://github.com/malyinik/bmstu-typst-template/tree/subject/algorithm-analysis) — версия для отчётов по дисциплине "Анализ алгоритмов" (ИУ7)
+- [`subject/coursework`](https://github.com/malyinik/bmstu-typst-template/tree/subject/coursework) — версия для курсовых работ (РПЗ)
 
 ## Установка шаблона
 
