@@ -282,10 +282,16 @@
   set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ])
   show bibliography: it => {
     pagebreak(weak: true)
-    show heading: title => {
-      align(center, title)
-      v(2em, weak: true)
+    // Запись оформляется как обычный абзац: номер стоит на абзацном отступе, а перенесённые строки начинаются от левого поля, как в списках.
+    // Выравнивание номеров отдельной колонкой (second-field-align в CSL) TestVkr принимает за неверный отступ, поэтому в стиле оно отключено.
+    // Typst кладёт каждую запись в отдельный блок без абзаца, и выключка по ширине к таким строкам применяется не всегда, поэтому блок заменяется абзацем.
+    // Блоки без содержимого и заголовок списка правило пропускает.
+    show block: entry => if entry.body in (none, auto) or entry.body == it.title {
+      entry
+    } else {
+      par(entry.body)
     }
+    show heading: title => align(center, title)
     show link: it => context {
       let size = measure(it)
       if size.width < (page.width - page.margin.left - page.margin.right) * 0.4 {
