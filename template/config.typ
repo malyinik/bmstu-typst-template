@@ -2,8 +2,9 @@
 #import "@preview/codly-languages:0.1.8": *
 #import "@preview/i-figured:0.2.4"
 
+// Буквы для обозначения приложений: по ГОСТ 7.32-2017 (п. 6.17.4) не используются Ё, З, Й, О, Ч, Ъ, Ы и Ь.
 // @typstyle off
-#let cyrillic-upper = ("А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Э", "Ю", "Я")
+#let cyrillic-upper = ("А", "Б", "В", "Г", "Д", "Е", "Ж", "И", "К", "Л", "М", "Н", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ш", "Щ", "Э", "Ю", "Я")
 // @typstyle on
 
 #let cyrillic-numbering(..nums) = {
@@ -70,7 +71,7 @@
     it
     pagebreak(weak: true)
   }
-  // Строка содержания собирается вручную: подразделы сдвигаются ровно на ширину номера родителя, а у приложений буква идёт после названия ("ПРИЛОЖЕНИЕ А").
+  // Строка содержания собирается вручную: подразделы сдвигаются ровно на ширину номера родителя, а у приложений буква идёт после слова ("ПРИЛОЖЕНИЕ А").
   // Со стандартной строкой TestVkr принимает более глубокий сдвиг подразделов за неверный абзацный отступ и не находит приложение в содержании.
   show outline.entry: it => context {
     set par(first-line-indent: (amount: 0cm, all: true))
@@ -92,8 +93,8 @@
       h(measure([1~1.1~1.1.1~]).width + 0.2em)
     }
 
-    if cyrillic-upper.contains(number) {
-      [#link(it.element.location(), title) #number]
+    if it.element.supplement == [Приложение] and it.level == 1 {
+      link(it.element.location())[#title #number]
     } else if number != none {
       [#number #link(it.element.location(), title)]
     } else {
@@ -319,26 +320,27 @@
  * Подключается в начале файла приложений через `#show: appendices` и действует до конца файла.
  */
 #let appendices(content) = {
-  set heading(supplement: [Приложение], bookmarked: false, numbering: (..nums) => {
-    let n = nums.pos()
-    if n.len() == 0 { return "" }
-    cyrillic-upper.at(n.first() - 1)
-  })
+  // Заголовок первого уровня с текстом "ПРИЛОЖЕНИЕ" получает букву после слова, а подразделы нумеруются в пределах приложения с буквой впереди: А.1, А.1.1.
+  set heading(supplement: [Приложение], bookmarked: false, numbering: cyrillic-numbering)
 
+  // Приложение начинается с новой страницы строкой "ПРИЛОЖЕНИЕ А" по центру (ГОСТ 7.32-2017, п. 6.17.3).
+  // Названия у приложения нет ни на странице, ни в содержании.
+  // Проверка check-ottochia кафедрального CI ищет в содержании строку "ПРИЛОЖЕНИЕ А", сразу за которой идут точки, и название между ними её ломает.
   // HACK: Закладка PDF у нумерованного заголовка начинается с номера ("А ПРИЛОЖЕНИЕ"), а проверки кафедры ищут её текст в документе.
   // Поэтому видимый заголовок в закладки не попадает, а закладку даёт невидимый ненумерованный заголовок с тем же текстом.
-  show heading: it => {
+  show heading.where(level: 1): it => {
     if it.numbering == none { return it }
     // Видимый заголовок не доходит до общего правила с i-figured.reset-counters, поэтому счётчики сбрасываются здесь.
     i-figured.reset-counters(it, return-orig-heading: false)
     let number = numbering(it.numbering, ..counter(heading).at(it.location()))
-    align(center, [
-      #set text(size: 16pt, hyphenate: false)
-      #v(1.5em, weak: true)
-      #it.body #number
-      #v(1.5em, weak: true)
-    ])
-    place(hide(heading(level: it.level, numbering: none, outlined: false, bookmarked: true)[#it.body #number]))
+    pagebreak(weak: true)
+    align(center, {
+      set text(size: 16pt, weight: "bold", hyphenate: false)
+      v(1.5em, weak: true)
+      [#it.body #number]
+      v(1.5em, weak: true)
+    })
+    place(hide(heading(level: 1, numbering: none, outlined: false, bookmarked: true)[#it.body #number]))
   }
 
   show figure: i-figured.show-figure.with(numbering: cyrillic-numbering)
