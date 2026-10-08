@@ -38,8 +38,8 @@
     )],
     [#widgets.form_field(
       label: "",
-      value: "И. И. Иванов",
-      hint: "(И. О. Фамилия)",
+      value: "И.И. Иванов",
+      hint: "(И.О. Фамилия)",
       length: 95%,
     )],
 
@@ -57,8 +57,8 @@
     )],
     [#widgets.form_field(
       label: "",
-      value: "П. П. Петров",
-      hint: "(И. О. Фамилия)",
+      value: "П.П. Петров",
+      hint: "(И.О. Фамилия)",
       length: 95%,
     )],
   ))
