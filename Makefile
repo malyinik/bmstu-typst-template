@@ -1,7 +1,7 @@
-TYPST_FILES := $(wildcard *.typ)
+SOURCES := $(wildcard *.typ *.yml template/* images/* listings/* data/*)
 VENV := .venv
 
-report.pdf: $(TYPST_FILES) 08_references.yml $(VENV)/.installed
+report.pdf: $(SOURCES) $(VENV)/.installed
 	typst compile --no-pdf-tags report.typ report.typst.pdf
 	$(VENV)/bin/python tools/fix-pdf-spaces.py report.typst.pdf report.spaces.pdf
 	$(VENV)/bin/python tools/optimize-pdf-images.py report.spaces.pdf report.pdf
