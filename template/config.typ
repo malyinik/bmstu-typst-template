@@ -293,3 +293,37 @@
 
   content
 }
+
+/**
+ * Оформление приложений: буквенная нумерация заголовков, рисунков, таблиц, листингов и формул.
+ * Подключается в начале файла приложений через `#show: appendices` и действует до конца файла.
+ */
+#let appendices(content) = {
+  set heading(supplement: [Приложение], bookmarked: false, numbering: (..nums) => {
+    let n = nums.pos()
+    if n.len() == 0 { return "" }
+    cyrillic-upper.at(n.first() - 1)
+  })
+
+  // HACK: Закладка PDF у нумерованного заголовка начинается с номера ("А ПРИЛОЖЕНИЕ"), а проверки кафедры ищут её текст в документе.
+  // Поэтому видимый заголовок в закладки не попадает, а закладку даёт невидимый ненумерованный заголовок с тем же текстом.
+  show heading: it => {
+    if it.numbering == none { return it }
+    // Видимый заголовок не доходит до общего правила с i-figured.reset-counters, поэтому счётчики сбрасываются здесь.
+    i-figured.reset-counters(it, return-orig-heading: false)
+    let number = numbering(it.numbering, ..counter(heading).at(it.location()))
+    align(center, [
+      #set text(size: 16pt, hyphenate: false)
+      #v(1.5em, weak: true)
+      #it.body #number
+      #v(1.5em, weak: true)
+    ])
+    place(hide(heading(level: it.level, numbering: none, outlined: false, bookmarked: true)[#it.body #number]))
+  }
+
+  show figure: i-figured.show-figure.with(numbering: cyrillic-numbering)
+  show math.equation: i-figured.show-equation.with(numbering: cyrillic-numbering)
+
+  counter(heading).update(0)
+  content
+}
