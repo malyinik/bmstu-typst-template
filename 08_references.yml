@@ -1,3 +1,18 @@
+cormen2013:
+  type: book
+  title: "Алгоритмы: построение и анализ"
+  author:
+    - "Кормен Т."
+    - "Лейзерсон Ч."
+    - "Ривест Р."
+    - "Штайн К."
+  edition: "3-е изд"
+  publisher:
+    name: "Вильямс"
+    location: "Москва"
+  date: 2013
+  page-total: 1328
+  language: ru
 veretennikov2015:
   type: book
   title: "Практикум по линейной алгебре"
@@ -9,9 +24,81 @@ veretennikov2015:
   date: 2015
   page-total: 140
   language: ru
+golub2013:
+  type: book
+  title: "Matrix Computations"
+  author:
+    - "Golub G. H."
+    - "Van Loan C. F."
+  edition: "4th ed"
+  publisher:
+    name: "Johns Hopkins University Press"
+    location: "Baltimore"
+  date: 2013
+  page-total: 756
+  language: en
+winograd1968:
+  type: article
+  title: "A new algorithm for inner product"
+  author: "Winograd S."
+  date: 1968
+  page-range: 693-694
+  language: en
+  parent:
+    type: periodical
+    title: "IEEE Transactions on Computers"
+    volume: "C-17"
+    issue: 7
+knuth2007:
+  type: book
+  title: "Искусство программирования. Т. 2. Получисленные алгоритмы"
+  author: "Кнут Д. Э."
+  edition: "3-е изд"
+  publisher:
+    name: "Вильямс"
+    location: "Москва"
+  date: 2007
+  page-total: 832
+  language: ru
+strassen1969:
+  type: article
+  title: "Gaussian elimination is not optimal"
+  author: "Strassen V."
+  date: 1969
+  page-range: 354-356
+  language: en
+  parent:
+    type: periodical
+    title: "Numerische Mathematik"
+    volume: 13
+    issue: 4
+gost19701:
+  type: book
+  title: "ГОСТ 19.701-90. Единая система программной документации. Схемы алгоритмов, программ, данных и систем. Обозначения условные и правила выполнения"
+  publisher:
+    name: "Стандартинформ"
+    location: "Москва"
+  date: 2010
+  page-total: 23
+  language: ru
+cppstd:
+  type: web
+  title: "ISO/IEC 14882:2020. Programming languages — C++"
+  url:
+    value: "https://www.iso.org/standard/79358.html"
+    date: 2026-09-20
+  language: en
+gcc:
+  type: web
+  title: "Using the GNU Compiler Collection (GCC). Options That Control Optimization"
+  url:
+    value: "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+    date: 2026-09-20
+  language: en
 lilaq:
   type: web
-  title: "Lilaq. Advanced data visualization in Typst."
+  title: "Lilaq. Advanced data visualization in Typst"
   url:
     value: "https://lilaq.org/"
-    date: 2025-09-25
+    date: 2026-09-20
+  language: en
