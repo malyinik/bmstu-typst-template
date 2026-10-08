@@ -3,7 +3,9 @@
 #titlepage.create[
   #titlepage.header(
     faculty: "Информатика и системы управления",
+    faculty_code: "ИУ",
     department: "Программное обеспечение ЭВМ и информационные технологии",
+    department_code: "ИУ7",
   )
 
   #titlepage.body()[

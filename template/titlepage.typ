@@ -1,7 +1,7 @@
 #import "widgets.typ"
 #import "config.typ": font_name
 
-#let header(faculty: "", department: "", field_of_study: "") = {
+#let header(faculty: "", faculty_code: "", department: "", department_code: "", field_of_study: "") = {
   grid(
     columns: (17%, 83%),
     align: (left, center + horizon),
@@ -33,7 +33,7 @@
 
   widgets.form_field(
     label: "ФАКУЛЬТЕТ",
-    value: ["#faculty"],
+    value: [#if faculty_code != "" [#faculty_code ]"#faculty"],
     hint: "",
     length: 100%,
     align: left,
@@ -41,7 +41,7 @@
   v(-2.5mm)
   widgets.form_field(
     label: "КАФЕДРА",
-    value: ["#department"],
+    value: [#if department_code != "" [#department_code ]"#department"],
     hint: "",
     length: 100%,
     align: left,
