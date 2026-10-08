@@ -217,19 +217,36 @@
   // @typstyle on
   let enum-numbering(n) = { [#rus_letters.at(n - 1))] }
 
-  set list(
-    indent: 1.25cm,
-    marker: [---],
-  )
+  // Элемент списка оформляется как обычный абзац: маркер стоит на абзацном отступе, а перенесённые строки начинаются от левого поля.
+  // При стандартной вёрстке перенесённые строки выравниваются по тексту после маркера, и TestVkr считает их отступ неверным.
+  // Первая строка вложенного элемента начинается под текстом родительского, поэтому её отступ больше на ширину маркера родителя вместе с пробелом.
+  // Накопленный отступ передаётся вложенным спискам через их поле indent.
+  // Эти правила объявлены раньше остальных правил списков и поэтому применяются последними, когда маркер и нумерация уже выбраны.
+  let list-items(it, marker) = for (i, item) in it.children.enumerate() {
+    let label = marker(i, item)
+    parbreak()
+    context {
+      let width = measure([#label~]).width
+      set par(first-line-indent: (amount: it.indent, all: true))
+      set list(indent: it.indent + width)
+      set enum(indent: it.indent + width)
+      [#box(width: width, label)#item.body]
+    }
+    parbreak()
+  }
+  show list: it => list-items(it, (..) => if type(it.marker) == array { it.marker.first() } else { it.marker })
+  show enum: it => list-items(it, (i, item) => {
+    let start = if type(it.start) == int { it.start } else { 1 }
+    numbering(it.numbering, if type(item.number) == int { item.number } else { start + i })
+  })
+
+  set list(indent: 1.25cm, marker: [---])
   show list: it => {
     set enum(numbering: enum-numbering)
     it
   }
 
-  set enum(
-    indent: 1.25cm,
-    numbering: "1)",
-  )
+  set enum(indent: 1.25cm, numbering: "1)")
   // Нумерация вложенных списков кириллическими буквами
   show enum: outer => {
     show enum: inner => {
