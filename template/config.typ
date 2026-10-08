@@ -294,6 +294,50 @@
   show sym.gt.eq: sym.gt.slant
 
   /**
+   * Пояснение обозначений под формулой
+   *
+   * Абзац, который начинается со слова "где", считается пояснением к формуле и пишется без абзацного отступа (ГОСТ 7.32-2017, п. 6.8.2).
+   * Если пояснения разделены переносом строки "\", слово "где" стоит у левого поля, а каждое пояснение начинается на абзацном отступе, как в образце из приложения к положению о нормоконтроле.
+   */
+  show par: it => {
+    // Готовый абзац пояснения уже без отступа, и проверка не даёт правилу применяться к собственному результату.
+    if it.first-line-indent.amount == 0pt {
+      return it
+    }
+    let children = if it.body.func() == [].func() {
+      it.body.children
+    } else {
+      (it.body,)
+    }
+    let first = children.at(0, default: none)
+    let starts-with-where = (
+      first != none and first.has("text") and (first.text == "где" or first.text.starts-with("где "))
+    )
+    if not starts-with-where {
+      return it
+    }
+
+    let no-indent = (amount: 0pt, all: true)
+    if not children.any(c => c.func() == linebreak) {
+      return par(first-line-indent: no-indent, it.body)
+    }
+    // Слово "где" убирается из начала текста и ставится в ячейку шириной в абзацный отступ, а перенесённые строки выравниваются по её правому краю.
+    let rest = if first.text == "где" {
+      children.slice(1)
+    } else {
+      (first.text.slice("где ".len()),) + children.slice(1)
+    }
+    if rest.len() > 0 and rest.first() == [ ] {
+      rest = rest.slice(1)
+    }
+    par(
+      first-line-indent: no-indent,
+      hanging-indent: 1.25cm,
+      box(width: 1.25cm)[где] + rest.join(),
+    )
+  }
+
+  /**
    * Настройка библиографии
    */
   set bibliography(
