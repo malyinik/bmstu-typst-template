@@ -6,7 +6,7 @@
     columns: (17%, 83%),
     align: (left, center + horizon),
     [
-      #image("images/bmstu_logo.svg", height: 36mm)
+      #image("images/bmstu_logo.png", height: 36mm)
     ],
     [
       #set text(weight: "bold")
