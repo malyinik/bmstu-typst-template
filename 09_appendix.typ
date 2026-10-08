@@ -12,7 +12,7 @@
   #let number = numbering(it.numbering, ..counter(heading).at(it.location()))
   #set text(size: 16pt, hyphenate: false)
   #v(1.5em, weak: true)
-  #it.body~#number
+  #it.body #number
   #v(1.5em, weak: true)
 ])
 

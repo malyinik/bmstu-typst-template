@@ -92,7 +92,7 @@
     }
 
     if cyrillic-upper.contains(number) {
-      [#link(it.element.location(), title)~#number]
+      [#link(it.element.location(), title) #number]
     } else if number != none {
       [#number #link(it.element.location(), title)]
     } else {
@@ -118,9 +118,9 @@
     [ВВЕДЕНИЕ],
     [РЕФЕРАТ],
     [СОДЕРЖАНИЕ],
-    [СПИСОК~ИСПОЛЬЗОВАННЫХ~ИСТОЧНИКОВ],
+    [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ],
     [ЗАКЛЮЧЕНИЕ],
-    [ПРИЛОЖЕНИЕ~A],
+    [ПРИЛОЖЕНИЕ А],
     [ПРИЛОЖЕНИЕ Б],
     [ПРИЛОЖЕНИЕ В],
     [ПРИЛОЖЕНИЕ Г],
@@ -265,7 +265,7 @@
   /**
    * Настройка библиографии
    */
-  set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК~ИСПОЛЬЗОВАННЫХ~ИСТОЧНИКОВ])
+  set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ])
   show bibliography: it => {
     pagebreak(weak: true)
     show heading: title => {
