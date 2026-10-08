@@ -13,6 +13,8 @@
   caption: [Подпись к листингу],
 )<classic>
 
+Определения типов `Matrix` и `MatrixRow` приведены в~@sec:appendix-a[приложении] на~@lst:matrix-types[листинге].
+
 == #lorem(6)
 
 В @tbl:tests[таблице] #lorem(19)
