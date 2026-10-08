@@ -1,4 +1,11 @@
-#let form_field(label: "Label", value: "Value", hint: "hint", length: 40mm, font_size: 12pt, align: (right, center)) = {
+#let form_field(
+    label: "Label",
+    value: "Value",
+    hint: "hint",
+    length: 40mm,
+    font_size: 12pt,
+    align: (right, center),
+) = {
     box(grid(
         columns: (auto, auto),
         align: align,

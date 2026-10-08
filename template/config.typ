@@ -9,9 +9,13 @@
 
 #let cyrillic-numbering(..nums) = {
   let numbers = nums.pos()
-  if numbers.len() == 0 { return "" }
+  if numbers.len() == 0 {
+    return ""
+  }
   let first = cyrillic-upper.at(numbers.first() - 1)
-  if numbers.len() == 1 { return first }
+  if numbers.len() == 1 {
+    return first
+  }
   first + "." + numbers.slice(1).map(str).join(".")
 }
 
@@ -235,10 +239,22 @@
     }
     parbreak()
   }
-  show list: it => list-items(it, (..) => if type(it.marker) == array { it.marker.first() } else { it.marker })
+  show list: it => list-items(it, (..) => {
+    if type(it.marker) == array {
+      it.marker.first()
+    } else {
+      it.marker
+    }
+  })
   show enum: it => list-items(it, (i, item) => {
-    let start = if type(it.start) == int { it.start } else { 1 }
-    numbering(it.numbering, if type(item.number) == int { item.number } else { start + i })
+    let number = if type(item.number) == int {
+      item.number
+    } else if type(it.start) == int {
+      it.start + i
+    } else {
+      i + 1
+    }
+    numbering(it.numbering, number)
   })
 
   set list(indent: 1.25cm, marker: [---])
@@ -280,7 +296,10 @@
   /**
    * Настройка библиографии
    */
-  set bibliography(style: "gost-r-7-0-5-2008-numeric.csl", title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ])
+  set bibliography(
+    style: "gost-r-7-0-5-2008-numeric.csl",
+    title: [СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ],
+  )
   show bibliography: it => {
     pagebreak(weak: true)
     // Запись оформляется как обычный абзац: номер стоит на абзацном отступе, а перенесённые строки начинаются от левого поля, как в списках.
@@ -321,7 +340,11 @@
  */
 #let appendices(content) = {
   // Заголовок первого уровня с текстом "ПРИЛОЖЕНИЕ" получает букву после слова, а подразделы нумеруются в пределах приложения с буквой впереди: А.1, А.1.1.
-  set heading(supplement: [Приложение], bookmarked: false, numbering: cyrillic-numbering)
+  set heading(
+    supplement: [Приложение],
+    bookmarked: false,
+    numbering: cyrillic-numbering,
+  )
 
   // Приложение начинается с новой страницы строкой "ПРИЛОЖЕНИЕ А" по центру (ГОСТ 7.32-2017, п. 6.17.3).
   // Названия у приложения нет ни на странице, ни в содержании.
@@ -329,7 +352,9 @@
   // HACK: Закладка PDF у нумерованного заголовка начинается с номера ("А ПРИЛОЖЕНИЕ"), а проверки кафедры ищут её текст в документе.
   // Поэтому видимый заголовок в закладки не попадает, а закладку даёт невидимый ненумерованный заголовок с тем же текстом.
   show heading.where(level: 1): it => {
-    if it.numbering == none { return it }
+    if it.numbering == none {
+      return it
+    }
     // Видимый заголовок не доходит до общего правила с i-figured.reset-counters, поэтому счётчики сбрасываются здесь.
     i-figured.reset-counters(it, return-orig-heading: false)
     let number = numbering(it.numbering, ..counter(heading).at(it.location()))
@@ -340,7 +365,12 @@
       [#it.body #number]
       v(1.5em, weak: true)
     })
-    place(hide(heading(level: 1, numbering: none, outlined: false, bookmarked: true)[#it.body #number]))
+    place(hide(heading(
+      level: 1,
+      numbering: none,
+      outlined: false,
+      bookmarked: true,
+    )[#it.body #number]))
   }
 
   show figure: i-figured.show-figure.with(numbering: cyrillic-numbering)

@@ -1,7 +1,13 @@
 #import "widgets.typ"
 #import "config.typ": font_name
 
-#let header(faculty: "", faculty_code: "", department: "", department_code: "", field_of_study: "") = {
+#let header(
+  faculty: "",
+  faculty_code: "",
+  department: "",
+  department_code: "",
+  field_of_study: "",
+) = {
   grid(
     columns: (17%, 83%),
     align: (left, center + horizon),
