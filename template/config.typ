@@ -70,7 +70,8 @@
     it
     pagebreak(weak: true)
   }
-  // HACK: Чтобы TestVkr.exe корректно читал заголовки в содержании, которые другие программы читают без проблем...
+  // Строка содержания собирается вручную: подразделы сдвигаются ровно на ширину номера родителя, а у приложений буква идёт после названия ("ПРИЛОЖЕНИЕ А").
+  // Со стандартной строкой TestVkr принимает более глубокий сдвиг подразделов за неверный абзацный отступ и не находит приложение в содержании.
   show outline.entry: it => context {
     set par(first-line-indent: (amount: 0cm, all: true))
 
@@ -129,10 +130,6 @@
   show heading.where(level: 4): set heading(numbering: none, outlined: false)
   show heading.where(level: 5): set heading(numbering: none, outlined: false)
   show heading: it => {
-    // HACK: Чтобы TestVkr.exe корректно читал заголовки в тексте, которые другие программы читают без проблем...
-    // TODO: включить перед отправкой
-    // place(horizon, rect(width: 100%, height: 100%, stroke: white.transparentize(100%)))
-
     set text(size: 16pt, hyphenate: false)
     v(1.5em, weak: true)
     pad(
