@@ -5,7 +5,12 @@
  * Номер в разделе равен сквозному номеру за вычетом значения того же счётчика на заголовке раздела.
  * Номер раздела оформляется по нумерации его заголовка, поэтому в приложениях он становится буквой без отдельных правил.
  * Разделом считается последний нумерованный заголовок первого уровня перед элементом.
+ * Режим нумерации хранится в состоянии `by-chapter` и может меняться по ходу документа, например в приложениях.
  */
+
+/// Режим нумерации: `true` - в пределах раздела, `false` - сквозная.
+/// Действует от места обновления до следующего обновления.
+#let by-chapter = state("numbering-by-chapter", true)
 
 /// Последний нумерованный заголовок первого уровня перед местом `loc` или `none`, если такого нет.
 #let chapter-heading(loc) = {
@@ -23,13 +28,13 @@
 }
 
 /// Номер фигуры или формулы `el` без скобок.
-/// При `by-chapter: true` номер берётся в пределах раздела ("2.1", "А.1"), иначе сквозной ("5").
+/// В режиме по разделам номер берётся в пределах раздела ("2.1", "А.1"), иначе сквозной ("5").
 /// Перед первым нумерованным разделом номер всегда сквозной.
 /// Нужен контекст.
-#let element-number(el, by-chapter: true) = {
+#let element-number(el) = {
   let elem-counter = element-counter(el)
   let n = elem-counter.at(el.location()).first()
-  if not by-chapter {
+  if not by-chapter.at(el.location()) {
     return str(n)
   }
   let chapter = chapter-heading(el.location())
@@ -43,17 +48,16 @@
 
 /// Номер элемента, в контексте которого Typst вызвал функцию нумерации.
 /// Typst вызывает её в контексте самого элемента и в подписи, и в ссылке на него.
-#let here-number(nums, by-chapter) = {
+#let here-number(nums) = {
   let el = query(here()).at(0, default: none)
   if el == none {
     return str(nums.pos().last())
   }
-  element-number(el, by-chapter: by-chapter)
+  element-number(el)
 }
 
 /// Функция нумерации фигур для `set figure(numbering: ...)`.
-/// Режим задаётся через `figure-numbering.with(by-chapter: false)`.
-#let figure-numbering(by-chapter: true, ..nums) = here-number(nums, by-chapter)
+#let figure-numbering(..nums) = here-number(nums)
 
 /// Функция нумерации формул для `set math.equation(numbering: ...)`: тот же номер в круглых скобках.
-#let equation-numbering(by-chapter: true, ..nums) = [(#here-number(nums, by-chapter))]
+#let equation-numbering(..nums) = [(#here-number(nums))]

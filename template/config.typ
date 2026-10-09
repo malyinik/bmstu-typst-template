@@ -1,6 +1,6 @@
-#import "@preview/codly:1.3.0"
-#import "@preview/codly-languages:0.1.8": *
-#import "numbering.typ": equation-numbering, figure-numbering
+#import "continuation.typ": with-continuation
+#import "listings.typ": code-block
+#import "numbering.typ": by-chapter, equation-numbering, figure-numbering
 
 // Буквы для обозначения приложений: по ГОСТ 7.32-2017 (п. 6.17.4) не используются Ё, З, Й, О, Ч, Ъ, Ы и Ь.
 // @typstyle off
@@ -29,8 +29,11 @@
  * При `true` они нумеруются в пределах раздела (1.1, 2.1), при `false` сквозь весь документ (1, 2, 3).
  * Оба режима предусмотрены ГОСТ 7.32-2017, пп. 6.5.4, 6.5.6, 6.6.4, 6.8.5.
  * В приложениях нумерация в обоих режимах идёт в пределах приложения (А.1, Б.1).
+ *
+ * Параметр `code-highlighting` включает подсветку синтаксиса в блоках кода.
+ * При `false` код выводится без подсветки, и язык, указанный у блоков, менять не нужно.
  */
-#let bmstu_config(numbering-by-chapter: true, content) = {
+#let bmstu_config(numbering-by-chapter: true, code-highlighting: true, content) = {
   /**
    * Настройка шрифта и языка документа
    */
@@ -183,35 +186,24 @@
       align(left, it)
       v(-0.2em, weak: false)
     }
+    // Часть таблицы, перенесённая на следующую страницу, начинается строкой "Продолжение таблицы N".
+    show table: body => with-continuation(body, it, "таблицы")
     it
   }
 
   /**
-   * Настройка блоков кода, вложенных в figure
+   * Настройка блоков кода
    */
-  show figure.where(kind: raw): it => {
+  show raw.where(block: true): it => code-block(it, highlight: code-highlighting)
+  // Часть листинга, перенесённая на следующую страницу, начинается строкой "Продолжение листинга N".
+  // Подпись выводится внутри блока кода, чтобы не отрываться от последних строк, поэтому шрифт и кегль текста закрепляются за ней заранее.
+  show figure.where(kind: raw): it => context {
+    let caption = text(font: text.font, size: text.size, pad(top: 1em, it.caption))
     set block(breakable: true)
-    [
-      #set text(size: 10pt)
-      #it.body
-    ]
-    set text(size: 14pt)
-    it.caption
+    set text(size: 10pt)
+    show raw.where(block: true): code => code-block(code, highlight: code-highlighting, caption: caption)
+    with-continuation(it.body, it, "листинга")
   }
-
-  show: codly.codly-init
-  codly.codly(
-    display-icon: false,
-    display-name: false,
-    languages: codly-languages,
-    number-align: right,
-    radius: 0pt,
-    skip-line: align(center, "..."),
-    skip-number: align(left, "..."),
-    smart-skip: true,
-    stroke: black + 0.8pt,
-    zebra-fill: none,
-  )
 
   /**
    * Общие настройки для всех фигур
@@ -219,7 +211,7 @@
    * Правило объявлено после правил отдельных видов фигур, поэтому применяется к фигуре раньше них.
    * Правила рисунков и листингов возвращают тело и подпись вместо фигуры, и объявленное до них правило до фигуры бы не дошло.
    */
-  set figure(numbering: figure-numbering.with(by-chapter: numbering-by-chapter))
+  set figure(numbering: figure-numbering)
   show figure: it => {
     set block(breakable: true)
     v(1.5em, weak: true)
@@ -296,7 +288,7 @@
     v(2em, weak: true)
   }
   show math.equation.where(block: false): set math.frac(style: "horizontal")
-  set math.equation(numbering: equation-numbering.with(by-chapter: numbering-by-chapter))
+  set math.equation(numbering: equation-numbering)
   // Формула с меткой <-> не нумеруется.
   show <->: set math.equation(numbering: none)
   show sym.integral: math.limits
@@ -391,6 +383,7 @@
     box(it)
   }
 
+  by-chapter.update(numbering-by-chapter)
   content
 }
 
@@ -432,8 +425,7 @@
   }
 
   // Рисунки, таблицы, листинги и формулы приложения нумеруются в пределах приложения и при сквозной нумерации основной части (ГОСТ 7.32-2017, пп. 6.5.5, 6.6.4, 6.8.5).
-  set figure(numbering: figure-numbering)
-  set math.equation(numbering: equation-numbering)
+  by-chapter.update(true)
 
   counter(heading).update(0)
   content
