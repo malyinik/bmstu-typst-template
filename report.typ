@@ -1,5 +1,6 @@
 #import "template/bmstu.typ": *
-#show: config.bmstu_config
+// При numbering-by-chapter: false рисунки, таблицы, листинги и формулы нумеруются сквозь весь документ, а не в пределах раздела.
+#show: config.bmstu_config.with(numbering-by-chapter: true)
 
 #include "00_title.typ"
 // Вставка страниц ТЗ и обновление счётчика страниц

@@ -1,6 +1,6 @@
 #import "@preview/codly:1.3.0"
 #import "@preview/codly-languages:0.1.8": *
-#import "@preview/i-figured:0.2.4"
+#import "numbering.typ": equation-numbering, figure-numbering
 
 // Буквы для обозначения приложений: по ГОСТ 7.32-2017 (п. 6.17.4) не используются Ё, З, Й, О, Ч, Ъ, Ы и Ь.
 // @typstyle off
@@ -21,7 +21,16 @@
 
 #let font_name = "Times New Roman"
 
-#let bmstu_config(content) = {
+/**
+ * Оформление расчётно-пояснительной записки.
+ * Подключается в главном файле через `#show: config.bmstu_config`.
+ *
+ * Параметр `numbering-by-chapter` выбирает нумерацию рисунков, таблиц, листингов и формул.
+ * При `true` они нумеруются в пределах раздела (1.1, 2.1), при `false` сквозь весь документ (1, 2, 3).
+ * Оба режима предусмотрены ГОСТ 7.32-2017, пп. 6.5.4, 6.5.6, 6.6.4, 6.8.5.
+ * В приложениях нумерация в обоих режимах идёт в пределах приложения (А.1, Б.1).
+ */
+#let bmstu_config(numbering-by-chapter: true, content) = {
   /**
    * Настройка шрифта и языка документа
    */
@@ -150,7 +159,6 @@
     )
     v(1.5em, weak: true)
   }
-  show heading: i-figured.reset-counters
 
   /**
    * Настройка подписей к фигурам
@@ -158,20 +166,9 @@
   set figure.caption(separator: [~---~])
   show figure.caption: set par(leading: 0.5em, justify: true)
   show figure.where(kind: image): set figure(supplement: [Рисунок])
-  show figure.where(kind: "i-figured-image"): it => {
+  show figure.where(kind: image): it => {
     block(it.body, sticky: true)
     it.caption
-  }
-
-  /**
-   * Общие настройки для всех фигур
-   */
-  show figure: i-figured.show-figure // Нумерация по заголовкам
-  show figure: it => {
-    set block(breakable: true)
-    v(1.5em, weak: true)
-    it
-    v(1.5em, weak: true)
   }
 
   /**
@@ -192,7 +189,7 @@
   /**
    * Настройка блоков кода, вложенных в figure
    */
-  show figure.where(kind: "i-figured-raw"): it => {
+  show figure.where(kind: raw): it => {
     set block(breakable: true)
     [
       #set text(size: 10pt)
@@ -215,6 +212,20 @@
     stroke: black + 0.8pt,
     zebra-fill: none,
   )
+
+  /**
+   * Общие настройки для всех фигур
+   *
+   * Правило объявлено после правил отдельных видов фигур, поэтому применяется к фигуре раньше них.
+   * Правила рисунков и листингов возвращают тело и подпись вместо фигуры, и объявленное до них правило до фигуры бы не дошло.
+   */
+  set figure(numbering: figure-numbering.with(by-chapter: numbering-by-chapter))
+  show figure: it => {
+    set block(breakable: true)
+    v(1.5em, weak: true)
+    it
+    v(1.5em, weak: true)
+  }
 
   /**
    * Настройка списков
@@ -285,7 +296,9 @@
     v(2em, weak: true)
   }
   show math.equation.where(block: false): set math.frac(style: "horizontal")
-  show math.equation: i-figured.show-equation // Нумерация по заголовкам
+  set math.equation(numbering: equation-numbering.with(by-chapter: numbering-by-chapter))
+  // Формула с меткой <-> не нумеруется.
+  show <->: set math.equation(numbering: none)
   show sym.integral: math.limits
   show sym.integral.double: math.limits
   show sym.integral.triple: math.limits
@@ -402,8 +415,6 @@
     if it.numbering == none {
       return it
     }
-    // Видимый заголовок не доходит до общего правила с i-figured.reset-counters, поэтому счётчики сбрасываются здесь.
-    i-figured.reset-counters(it, return-orig-heading: false)
     let number = numbering(it.numbering, ..counter(heading).at(it.location()))
     pagebreak(weak: true)
     align(center, {
@@ -420,8 +431,9 @@
     )[#it.body #number]))
   }
 
-  show figure: i-figured.show-figure.with(numbering: cyrillic-numbering)
-  show math.equation: i-figured.show-equation.with(numbering: cyrillic-numbering)
+  // Рисунки, таблицы, листинги и формулы приложения нумеруются в пределах приложения и при сквозной нумерации основной части (ГОСТ 7.32-2017, пп. 6.5.5, 6.6.4, 6.8.5).
+  set figure(numbering: figure-numbering)
+  set math.equation(numbering: equation-numbering)
 
   counter(heading).update(0)
   content
