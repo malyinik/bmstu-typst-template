@@ -1,31 +1,13 @@
-TYPST_FILES := $(wildcard *.typ)
+SOURCES := $(wildcard *.typ *.yml template/* images/* listings/* data/*)
+VENV := .venv
 
-report.pdf: $(TYPST_FILES) 07_references.yml
-	typst compile report.typ
-	make optimize_pdf
+report.pdf: $(SOURCES) $(VENV)/.installed
+	typst compile --no-pdf-tags report.typ report.typst.pdf
+	$(VENV)/bin/python tools/fix-pdf-spaces.py report.typst.pdf report.spaces.pdf
+	$(VENV)/bin/python tools/optimize-pdf-images.py report.spaces.pdf report.pdf
+	rm report.typst.pdf report.spaces.pdf
 
-.PHONY: optimize_pdf
-optimize_pdf:
-	gs -sDEVICE=pdfwrite \
-		-dCompatibilityLevel=1.4 \
-		-dNOPAUSE \
-		-dOptimize=true \
-		-dQUIET \
-		-dBATCH \
-		-dRemoveUnusedFonts=true \
-		-dRemoveUnusedImages=true \
-		-dOptimizeResources=true \
-		-dDetectDuplicateImages \
-		-dCompressFonts=true \
-		-dEmbedAllFonts=true \
-		-dSubsetFonts=true \
-		-dPreserveAnnots=true \
-		-dPreserveMarkedContent=true \
-		-dPreserveOverprintSettings=true \
-		-dPreserveHalftoneInfo=true \
-		-dPreserveOPIComments=true \
-		-dPreserveDeviceN=true \
-		-dMaxInlineImageSize=0 \
-		-sOutputFile="report_optimized.pdf" \
-		"report.pdf"
-		mv "report_optimized.pdf" "report.pdf"
+$(VENV)/.installed:
+	python3 -m venv $(VENV)
+	$(VENV)/bin/pip install --quiet pikepdf==10.3.0
+	touch $@
