@@ -95,10 +95,10 @@ gcc:
     value: "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
     date: 2026-09-20
   language: en
-lilaq:
+matplotlib:
   type: web
-  title: "Lilaq. Advanced data visualization in Typst"
+  title: "Matplotlib. Visualization with Python"
   url:
-    value: "https://lilaq.org/"
-    date: 2026-09-20
+    value: "https://matplotlib.org/"
+    date: 2026-10-10
   language: en

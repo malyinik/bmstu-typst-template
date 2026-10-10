@@ -1,5 +1,3 @@
-#import "@preview/lilaq:0.5.0" as lq
-
 = Исследовательская часть
 
 == Технические характеристики
@@ -16,7 +14,7 @@
 
 == Время выполнения
 
-Замеры проводились на случайных квадратных матрицах размером от 100 до 500 с шагом 100. Для каждого размера умножение повторялось 10 раз, и в таблицу заносилось среднее время. Параметры замеров перечислены в @tbl:bench-params[таблице] @sec:appendix-b[приложения]. Результаты приведены в @tbl:benchmark-data[таблице] и на @fig:benchmark[рисунке], графики построены библиотекой Lilaq~@lilaq.
+Замеры проводились на случайных квадратных матрицах размером от 100 до 500 с шагом 100. Для каждого размера умножение повторялось 10 раз, и в таблицу заносилось среднее время. Параметры замеров перечислены в @tbl:bench-params[таблице] @sec:appendix-b[приложения]. Результаты приведены в @tbl:benchmark-data[таблице] и на @fig:benchmark[рисунке], графики построены библиотекой Matplotlib~@matplotlib.
 
 // Строки таблицы собираются из трёх CSV-файлов: размер берётся из первого, время каждого алгоритма из своего файла.
 #let data_1 = csv("data/1.csv")
@@ -43,50 +41,8 @@
   )<tbl:benchmark-data>
 ]
 
-#let plot_thickness = 1.5pt
-#let plot_mark_size = 5pt
-#let stroke_1 = stroke(dash: "dashed", thickness: plot_thickness)
-#let stroke_2 = stroke(dash: (10pt, 10pt), thickness: plot_thickness)
-
 #figure(
-  lq.diagram(
-    width: 100%,
-    height: 40%,
-    xlabel: [Размер матрицы],
-    ylabel: [Время, мс],
-    legend: (position: left + top),
-
-    let (x, y) = lq.load-txt(read("data/1.csv")),
-    lq.plot(
-      x,
-      y,
-      mark: "o",
-      mark-size: plot_mark_size,
-      label: [Классический],
-      smooth: true,
-      stroke: stroke_1,
-    ),
-    (x, y) = lq.load-txt(read("data/2.csv")),
-    lq.plot(
-      x,
-      y,
-      mark: "v",
-      mark-size: plot_mark_size,
-      label: [Виноград],
-      smooth: true,
-      stroke: stroke_2,
-    ),
-    (x, y) = lq.load-txt(read("data/3.csv")),
-    lq.plot(
-      x,
-      y,
-      mark: "s",
-      mark-size: plot_mark_size,
-      label: [Виноград, оптимизированный],
-      smooth: true,
-      stroke: plot_thickness,
-    ),
-  ),
+  image("images/benchmark.svg", width: 100%),
   caption: [Зависимость времени умножения от размера квадратных матриц],
 )<fig:benchmark>
 
