@@ -1,5 +1,7 @@
 #import "template/bmstu.typ": *
-#show: config.bmstu_config
+// При numbering-by-chapter: false рисунки, таблицы, листинги и формулы нумеруются сквозь весь документ, а не в пределах раздела.
+// При code-highlighting: false код в листингах выводится без подсветки синтаксиса.
+#show: config.bmstu_config.with(numbering-by-chapter: true, code-highlighting: true)
 
 #include "00_title.typ"
 #outline()

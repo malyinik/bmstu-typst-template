@@ -11,7 +11,8 @@ veretennikov2015:
   language: ru
 lilaq:
   type: web
-  title: "Lilaq. Advanced data visualization in Typst."
+  title: "Lilaq. Advanced data visualization in Typst"
   url:
     value: "https://lilaq.org/"
     date: 2025-09-25
+  language: en

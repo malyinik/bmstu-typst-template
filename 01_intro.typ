@@ -4,7 +4,13 @@
 
 #lorem(50)
 
-#import "@preview/rufish:0.1.0": rufish, types
-#rufish(49, type: types.surkov)
+Целью работы является #lorem(12)
+
+Для достижения поставленной цели необходимо решить следующие задачи:
+
++ #lorem(6)
++ #lorem(8)
++ #lorem(5)
++ #lorem(7)
 
 #pagebreak(weak: true)
