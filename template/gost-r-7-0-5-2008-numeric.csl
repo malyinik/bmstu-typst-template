@@ -194,9 +194,10 @@
   </citation>
   <!-- Bibliography -->
   <!-- Опции "et-al..." в следующей строчке описывают требования ГОСТ-а, но не полностью. В ГОСТ-е прописано, что от 1 до 3 авторов указываются полностью и в "заголовке", т.е. в начале записи перед названием, а 4 и более сокращаются с помощью "и др." и указываются только в "сведениях об ответственности", т.е. после названия. В этом стиле я сознательно сделал выбор в пользу упрощения (авторы всегда указываются вначале), чтобы не уродовать библиографию. Если есть строгая необходимость следовать букве ГОСТ-а, то это можно реализовать как в ... -->
-  <bibliography et-al-min="4" et-al-use-first="1" entry-spacing="0" second-field-align="flush">
+  <!-- modified on 2026-10-09 by malyinik: removed second-field-align="flush" and added space after citation number, so that each entry is a paragraph with the number at the first-line indent (TestVkr treats the number column as a wrong indent) -->
+  <bibliography et-al-min="4" et-al-use-first="1" entry-spacing="0">
     <layout suffix=".">
-      <text variable="citation-number" suffix="."/>
+      <text variable="citation-number" suffix=". "/>
       <!-- Комментарии ниже даны в соответствии с терминами, определёнными в ГОСТе -->
       <!-- modified on 2025-10-18 by malyinik: changed delimiter to ". — " per GOST 7.1-2003 4.7.2, 4.7.5 -->
       <group delimiter=". — ">
