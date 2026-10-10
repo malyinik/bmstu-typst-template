@@ -1,11 +1,9 @@
-SOURCES := $(wildcard *.typ *.yml template/* images/* listings/* data/*)
 VENV := .venv
+PYTHON := $(VENV)/bin/python
 
-report.pdf: $(SOURCES) $(VENV)/.installed
-	typst compile --no-pdf-tags report.typ report.typst.pdf
-	$(VENV)/bin/python tools/fix-pdf-spaces.py report.typst.pdf report.spaces.pdf
-	$(VENV)/bin/python tools/optimize-pdf-images.py report.spaces.pdf report.pdf
-	rm report.typst.pdf report.spaces.pdf
+include iu7-nir-student.mk
+
+release/report.pdf: $(VENV)/.installed
 
 $(VENV)/.installed:
 	python3 -m venv $(VENV)
