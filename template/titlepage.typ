@@ -71,7 +71,15 @@
     place(bottom, dy: -3cm, content)
 }
 
-#let create(doc, font_size: 11pt) = {
+/// Титульный лист с содержимым `doc` и подписью внизу страницы.
+/// Город `city` необязателен и при пустом значении не выводится.
+/// Год `year` по умолчанию берётся на момент сборки документа.
+#let create(
+    doc,
+    city: "",
+    year: datetime.today().year(),
+    font_size: 11pt,
+) = {
     set par(
         justify: false,
         first-line-indent: 0pt,
@@ -86,7 +94,7 @@
         footer: [
             #align(center, text(
                 [
-                    Москва, #datetime.today().year()
+                    #if city != "" [#city,] #year~г.
                 ],
             ))
         ],
