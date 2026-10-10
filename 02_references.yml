@@ -1,0 +1,39 @@
+bakhvalov2011:
+  type: book
+  title: "Численные методы"
+  author:
+    - "Бахвалов Н. С."
+    - "Жидков Н. П."
+    - "Кобельков Г. М."
+  edition: "7-е изд"
+  publisher:
+    name: "БИНОМ. Лаборатория знаний"
+    location: "Москва"
+  date: 2011
+  page-total: 636
+  language: ru
+kalitkin2011:
+  type: book
+  title: "Численные методы"
+  author: "Калиткин Н. Н."
+  edition: "2-е изд"
+  publisher:
+    name: "БХВ-Петербург"
+    location: "Санкт-Петербург"
+  date: 2011
+  page-total: 592
+  language: ru
+python:
+  type: web
+  title: "Python 3 Documentation"
+  url:
+    value: "https://docs.python.org/3/"
+    date: 2026-10-10
+  language: en
+lilaq:
+  type: web
+  title: "Lilaq. Advanced data visualization in Typst"
+  url:
+    value: "https://lilaq.org/"
+    date: 2026-10-10
+  language: en
