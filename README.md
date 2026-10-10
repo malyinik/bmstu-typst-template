@@ -1,17 +1,20 @@
-# Шаблон для курсовых работ (РПЗ)
+# Шаблон для отчёта о НИР
 
-Установка в папку с курсовой работой:
+> [!WARNING]
+> Разделы и текст в шаблоне не являются ни структурой НИР, ни её примером. Они только показывают оформление и то, что такой документ проходит предварительную проверку TestVkr (вид работы НИР) и пайплайн GitLab кафедры ИУ7. Состав разделов своей работы нужно брать из задания на НИР и требований кафедры.
+
+Установка в папку с НИР:
 
 - Linux/MacOS
   ```bash
-  git clone --depth 1 -b subject/coursework https://github.com/malyinik/bmstu-typst-template.git report/ && \
-  cd report && \
+  git clone --depth 1 -b subject/nir https://github.com/malyinik/bmstu-typst-template.git nir/ && \
+  cd nir && \
   rm -rf .git README.md
   ```
 - Windows
   ```powershell
-  git clone --depth 1 -b subject/coursework https://github.com/malyinik/bmstu-typst-template.git report/;
-  if ($?) { cd report; rm -Recurse -Force .git, README.md }
+  git clone --depth 1 -b subject/nir https://github.com/malyinik/bmstu-typst-template.git nir/;
+  if ($?) { cd nir; rm -Recurse -Force .git, README.md }
   ```
 
 Сборка PDF:
@@ -27,4 +30,4 @@ make
 
 Ghostscript в сборке не используется. После него TestVkr перестаёт распознавать в PDF из Typst титульный лист и структуру документа, а сжимать после Typst ему почти нечего. Файл после Ghostscript выходит даже больше исходного.
 
-Пример отчёта из шаблона проходит программу предварительной проверки TestVkr.exe версии 1.0.0.232 (вид работы КуР) без замечаний, а также PDF-проверки CI из открытого доступа на GitLab кафедры ИУ7 по состоянию на 9 октября 2026 года.
+Документ из шаблона проходит программу предварительной проверки TestVkr.exe версии 1.0.0.232 (вид работы НИР) без замечаний, а также PDF-проверки CI из открытого доступа на GitLab кафедры ИУ7 по состоянию на 10 октября 2026 года.

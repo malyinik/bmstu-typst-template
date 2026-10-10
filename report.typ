@@ -4,14 +4,6 @@
 #show: config.bmstu_config.with(numbering-by-chapter: true, code-highlighting: true)
 
 #include "00_title.typ"
-// Вставка страниц ТЗ и обновление счётчика страниц
-// #page(numbering: none, margin: 0mm)[
-//     #image("ТЗ.pdf", width: 100%, page: 1)
-// ]
-// #page(numbering: none, margin: 0mm)[
-//     #image("ТЗ.pdf", width: 100%, page: 2)
-// ]
-// #counter(page).update(4)
 #include "01_abstract.typ"
 #outline()
 #include "02_intro.typ"
