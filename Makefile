@@ -14,5 +14,5 @@ compressed: $(SOURCES) $(VENV)/.installed
 
 $(VENV)/.installed:
 	python3 -m venv $(VENV)
-	$(VENV)/bin/pip install --quiet --disable-pip-version-check pikepdf==10.3.0
+	$(VENV)/bin/python -m pip install --quiet --disable-pip-version-check pikepdf==10.3.0
 	touch $@
