@@ -183,10 +183,11 @@
     <sort>
       <key variable="citation-number"/>
     </sort>
-    <layout prefix="[" suffix="]" delimiter=",">
+    <!-- modified on 2026-10-18 by malyinik: added space after comma between citation numbers and made spaces inside citation non-breaking, so that adjacent citations render as "[1, 2]" and never break across lines without wrapping each cite in a box (a box prevents Typst from grouping adjacent citations) -->
+    <layout prefix="[" suffix="]" delimiter=",&#160;">
       <text variable="citation-number"/>
       <!-- Следующее должно неплохо работать для многих случаев, но точность отображения терминов (с., т., ч. и т.п.) определяется файлом русской локали, который не всегда совпадает с ГОСТ-ом -->
-      <group prefix=", " delimiter=" ">
+      <group prefix=",&#160;" delimiter="&#160;">
         <label variable="locator" form="short" plural="never"/>
         <text variable="locator"/>
       </group>
