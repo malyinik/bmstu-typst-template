@@ -376,13 +376,6 @@
     pagebreak(weak: true)
   }
 
-  /*
-   * Настройка ссылки на источник
-   */
-  show cite: it => {
-    box(it)
-  }
-
   by-chapter.update(numbering-by-chapter)
   content
 }
