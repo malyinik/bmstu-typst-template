@@ -4,7 +4,7 @@
 << /Lang (ru) /Metadata 3 0 R /Names << /Dests << /Names [ (sec:appendix-a) 4 0 R (sec:appendix-b) 5 0 R (sec:appendix-c) 6 0 R ] >> >> /Outlines 7 0 R /PageLabels 8 0 R /Pages 9 0 R /Type /Catalog /ViewerPreferences << /Direction /L2R >> >>
 endobj
 2 0 obj
-<< /CreationDate (D:20261018191046+03'00) /Creator (Typst 0.15.1) /ModDate (D:20261018191046+03'00) >>
+<< /CreationDate (D:20261018192918+03'00) /Creator (Typst 0.15.1) /ModDate (D:20261018192918+03'00) >>
 endobj
 3 0 obj
 << /Subtype /XML /Type /Metadata /Length 1119 >>
@@ -19,12 +19,12 @@ stream
           <rdf:li>ru</rdf:li>
         </rdf:Bag>
       </dc:language>
-      <xmp:ModifyDate>2026-10-18T19:10:46+03:00</xmp:ModifyDate>
-      <xmp:CreateDate>2026-10-18T19:10:46+03:00</xmp:CreateDate>
+      <xmp:ModifyDate>2026-10-18T19:29:18+03:00</xmp:ModifyDate>
+      <xmp:CreateDate>2026-10-18T19:29:18+03:00</xmp:CreateDate>
       <xmpTPg:NPages>31</xmpTPg:NPages>
       <dc:format>application/pdf</dc:format>
-      <xmpMM:InstanceID>pCaa6UqiflJuJ6MZf9M/HQ==</xmpMM:InstanceID>
-      <xmpMM:DocumentID>pCaa6UqiflJuJ6MZf9M/HQ==</xmpMM:DocumentID>
+      <xmpMM:InstanceID>4P2m+g52pkSm0zzczLtnTg==</xmpMM:InstanceID>
+      <xmpMM:DocumentID>4P2m+g52pkSm0zzczLtnTg==</xmpMM:DocumentID>
       <xmpMM:RenditionClass>proof</xmpMM:RenditionClass>
       <pdf:PDFVersion>1.7</pdf:PDFVersion>
     </rdf:Description>
@@ -2920,7 +2920,7 @@ xref
 0000448816 00000 n 
 0000449011 00000 n 
 0000449212 00000 n 
-trailer << /Info 2 0 R /Root 1 0 R /Size 333 /ID [<7043616136557169666c4a754a364d5a66394d2f48513d3d><5b0109a9fd9f2046fab22c797d9219b1>] >>
+trailer << /Info 2 0 R /Root 1 0 R /Size 333 /ID [<3450326d2b673532706b536d307a7a637a4c746e54673d3d><d69e433356db7c57ab02095d75b3439d>] >>
 startxref
 449373
 %%EOF
