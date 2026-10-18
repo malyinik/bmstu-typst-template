@@ -183,8 +183,8 @@
     <sort>
       <key variable="citation-number"/>
     </sort>
-    <!-- modified on 2026-10-18 by malyinik: added space after comma between citation numbers and made spaces inside citation non-breaking, so that adjacent citations render as "[1, 2]" and never break across lines without wrapping each cite in a box (a box prevents Typst from grouping adjacent citations) -->
-    <layout prefix="[" suffix="]" delimiter=",&#160;">
+    <!-- modified on 2026-10-18 by malyinik: changed delimiter between citations to semicolon per GOST R 7.0.5-2008 7.5.4, so that adjacent citations render as "[1; 6, с. 555]", and made spaces inside citation non-breaking, so that it never breaks across lines without wrapping each cite in a box (a box prevents Typst from grouping adjacent citations) -->
+    <layout prefix="[" suffix="]" delimiter=";&#160;">
       <text variable="citation-number"/>
       <!-- Следующее должно неплохо работать для многих случаев, но точность отображения терминов (с., т., ч. и т.п.) определяется файлом русской локали, который не всегда совпадает с ГОСТ-ом -->
       <group prefix=",&#160;" delimiter="&#160;">
