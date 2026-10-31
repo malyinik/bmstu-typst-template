@@ -3,7 +3,14 @@
 #let total_pages = context counter(page).final().at(0)
 #let total_figures = context counter(figure.where(kind: image)).final().at(0)
 #let total_tables = context counter(figure.where(kind: table)).final().at(0)
-#let total_sources = yaml("08_references.yml").keys().len()
+#let total_sources = context {
+  let bibliographies = query(bibliography)
+  if bibliographies.len() > 0 and bibliographies.first().full {
+    yaml("08_references.yml").keys().len()
+  } else {
+    query(cite).map(c => c.key).dedup().len()
+  }
+}
 // Приложения считаются по нумерованным заголовкам с подписью "Приложение", которую им даёт правило appendices из шаблона.
 #let total_appendices = context query(heading).filter(h => h.supplement == [Приложение] and h.numbering != none).len()
 
