@@ -178,8 +178,12 @@
    * Настройка таблиц
    */
   show table: set text(size: 12pt)
+  // В ячейках таблиц абзацы и списки начинаются от левого края ячейки без абзацного отступа 1,25 см.
+  show table: set par(first-line-indent: 0pt)
+  show table: set list(indent: 0pt)
+  show table: set enum(indent: 0pt)
   show figure.where(kind: table): it => {
-    set par(justify: false, leading: 0.5em)
+    set par(justify: false, leading: 0.5em, spacing: 0.5em)
     set figure.caption(position: top)
     show figure.caption: it => {
       set block(sticky: true)
